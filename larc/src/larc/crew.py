@@ -11,13 +11,16 @@ class Larc():
         """
         Initialize the Larc crew with the DeepSeek configuration.
         """
-        self.agent_llm=LLM(
+        DEEPSEEK_LLM = LLM(
                 api_key=deepseek_api_key,
                 base_url=deepseek_api_base,  # Set the DeepSeek API base URL
                 model=deepseek_model
-		)
-        print (deepseek_api_base,deepseek_api_key,deepseek_model)
-
+        )
+        
+        LLAMA31_LLM = LLM(model="ollama/llama3.1")
+        MISTRAL_LLM = LLM(model="ollama/mistral")
+        
+        self.agent_llm = MISTRAL_LLM
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
