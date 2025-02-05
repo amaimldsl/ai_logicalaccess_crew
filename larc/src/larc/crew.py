@@ -19,8 +19,10 @@ class Larc():
         
         LLAMA31_LLM = LLM(model="ollama/llama3.1")
         MISTRAL_LLM = LLM(model="ollama/mistral")
+        LLAMA32_LLM = LLM(model="ollama/llama3.2")
         
-        self.agent_llm = MISTRAL_LLM
+        
+        self.agent_llm = LLAMA32_LLM
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
