@@ -1,17 +1,13 @@
-research_task:
-  description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+review_logical_access:
+    description: Compare system access levels against authorized access matrix
+    agent: logical_access_reviewer
+    priority: 1
+    expected_output: A markdown file containing access-related findings with title, background, discrepancies, and user feedback section
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
-  expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+
+compile_audit_report:
+    description: Compile all findings into comprehensive audit report
+    agent: audit_report_writer
+    priority: 2
+    outputs: final_audit_report.md
+    expected_output: A comprehensive audit report with executive summaries, detailed findings, risk ratings, and management actions. Add A section for entire logical access risk rating.

@@ -1,62 +1,68 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task,LLM
 from crewai.project import CrewBase, agent, crew, task
-
-# If you want to run a snippet of code before or after the crew starts, 
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+from tools.access_review import AccessReview
+from openai import OpenAI
 
 @CrewBase
 class Larc():
-	"""Larc crew"""
+    """Larc crew"""
 
-	# Learn more about YAML configuration files here:
-	# Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-	# Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
-	agents_config = 'config/agents.yaml'
-	tasks_config = 'config/tasks.yaml'
-
-	# If you would like to add tools to your agents, you can learn more about it here:
-	# https://docs.crewai.com/concepts/agents#agent-tools
-	@agent
-	def researcher(self) -> Agent:
-		return Agent(
-			config=self.agents_config['researcher'],
-			verbose=True
+    def __init__(self, deepseek_api_key, deepseek_api_base, deepseek_model):
+        """
+        Initialize the Larc crew with the DeepSeek configuration.
+        """
+        self.agent_llm=LLM(
+                api_key=deepseek_api_key,
+                base_url=deepseek_api_base,  # Set the DeepSeek API base URL
+                model=deepseek_model
 		)
+        print (deepseek_api_base,deepseek_api_key,deepseek_model)
 
-	@agent
-	def reporting_analyst(self) -> Agent:
-		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			verbose=True
-		)
 
-	# To learn more about structured task outputs, 
-	# task dependencies, and task callbacks, check out the documentation:
-	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
-	@task
-	def research_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['research_task'],
-		)
+    # Learn more about YAML configuration files here:
+    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
+    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
+    agents_config = 'config/agents.yaml'
+    tasks_config = 'config/tasks.yaml'
 
-	@task
-	def reporting_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
-		)
+    access_review = AccessReview()
 
-	@crew
-	def crew(self) -> Crew:
-		"""Creates the Larc crew"""
-		# To learn how to add knowledge sources to your crew, check out the documentation:
-		# https://docs.crewai.com/concepts/knowledge#what-is-knowledge
+    @agent
+    def logical_access_reviewer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['logical_access_reviewer'],
+            verbose=True,
+            llm=self.agent_llm,
+        )
 
-		return Crew(
-			agents=self.agents, # Automatically created by the @agent decorator
-			tasks=self.tasks, # Automatically created by the @task decorator
-			process=Process.sequential,
-			verbose=True,
-			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
-		)
+    @agent
+    def audit_report_writer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['audit_report_writer'],
+            verbose=True,
+            llm=self.agent_llm,
+        )
+
+    @task
+    def review_logical_access(self) -> Task:
+        return Task(
+            config=self.tasks_config['review_logical_access'],
+            tools=[self.access_review.access_review_tool],
+            
+        )
+
+    @task
+    def compile_audit_report(self) -> Task:
+        return Task(
+            config=self.tasks_config['compile_audit_report'],
+        )
+
+    @crew
+    def crew(self) -> Crew:
+        """Creates the Larc crew"""
+        return Crew(
+            agents=self.agents,  # Automatically created by the @agent decorator
+            tasks=self.tasks,  # Automatically created by the @task decorator
+            process=Process.sequential,
+            verbose=True,
+        )
