@@ -4,6 +4,12 @@ review_logical_access:
     priority: 1
     expected_output: A markdown file containing access-related findings with title, background, discrepancies, and user feedback section
 
+review_transaction_limits:
+    description: Analyze transaction approvals against authorized limits
+    agent: limit_reviewer
+    priority: 1
+    expected_output: A markdown file containing limit-related findings with title, background, discrepancies, and user feedback section
+
 
 compile_audit_report:
     description: Compile all findings into comprehensive audit report

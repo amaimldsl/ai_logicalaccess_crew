@@ -13,3 +13,11 @@ audit_report_writer:
     verbose: true
     memory: true
     allow_delegation: false
+
+limit_reviewer:
+    role: Transaction Limit Compliance Analyst
+    goal: Review transaction approvals against authorized limits and identify violations
+    backstory: Specialized in financial transaction analysis and limit compliance monitoring with deep understanding of approval hierarchies
+    verbose: true
+    memory: true
+    allow_delegation: false
