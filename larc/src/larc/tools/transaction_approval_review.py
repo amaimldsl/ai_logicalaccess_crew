@@ -1,12 +1,12 @@
 from crewai.tools import tool
 import pandas as pd
-import PyPDF2
-import io
 from pathlib import Path
 
+
+
 class TransactionApprovalReview:
-    @tool("transaction_approval_review_tool")
-    def access_review_tool() -> str:
+    @tool("transalimit_review_tool")
+    def limit_review_tool() -> str:
         """
         Analyze transaction approvals based on authorization limits.
         Reviews each transaction to check if it complies with single or joint approval limits.
@@ -18,46 +18,34 @@ class TransactionApprovalReview:
         base_dir = Path(__file__).resolve().parent
         data_dir = base_dir.parent / 'data'
         
-        # Paths to PDF and CSV
-        pdf_path = data_dir / 'limit_authorization.pdf'
-        csv_path = data_dir / 'transaction_logs.csv'
+        # Paths to CSV files
+        limits_path = data_dir / 'limit_authorization.csv'
+        transactions_path = data_dir / 'transaction_logs.csv'
         
-        # Read PDF content
-        with open(pdf_path, 'rb') as pdf_file:
-            pdf_content = pdf_file.read()
+        # Read authorization limits
+        limits_df = pd.read_csv(limits_path)
         
-        # Create PDF reader
-        pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_content))
-        
-        # Extract text from first page
-        text = pdf_reader.pages[0].extract_text()
-        
-        # Parse limits from text
+        # Convert limits to dictionary for easy lookup
         limits = {}
-        for line in text.split('\n')[1:]:  # Skip header
-            if line.strip():
-                parts = line.split(',')
-                if len(parts) == 4:
-                    user_level, user_id, single_limit, joint_limit = parts
-                    limits[user_id] = {
-                        'level': user_level.strip(),
-                        'single_approval_limit': float(single_limit.strip()),
-                        'joint_approval_limit': float(joint_limit.strip())
-                    }
+        for _, row in limits_df.iterrows():
+            limits[row['user_id']] = {
+                'level': row['user_level'],
+                'single_approval_limit': row['single_approval_limit'],
+                'joint_approval_limit': row['joint_approval_limit']
+            }
         
         # Read transaction logs
-        df = pd.read_csv(csv_path)
+        df = pd.read_csv(transactions_path)
         
         # Prepare results
         results = {}
         
         for idx, transaction in df.iterrows():
-            # Get approved users for this transaction
-            approved_users = [user for user in [
-                transaction['approval_one_user'], 
-                transaction['approval_two_user'], 
-                transaction['approval_three_user']
-            ] if pd.notna(user)]
+            # Dynamically find all approval users
+            approved_users = [
+                user for user in transaction.filter(like='approval_').dropna().to_list()
+                if pd.notna(user)
+            ]
             
             # Transaction details
             transaction_details = {
