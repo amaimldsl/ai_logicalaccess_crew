@@ -2,18 +2,174 @@ review_logical_access:
     description: Compare system access levels against authorized access matrix
     agent: logical_access_reviewer
     priority: 1
-    expected_output: A markdown file containing access-related findings with title, background, discrepancies, and user feedback section
+    expected_output: A markdown file containing access-related findings
+    output_structure:
+        sections:
+            - title: Observation Title
+              requirements:
+                - Subject-focused and concise
+                - Non-negative phrasing
+                - Clear without technical jargon
+            - title: Observation Details
+              format: bullet_points
+              requirements:
+                - Direct and concise points
+                - Logical flow in main and sub-bullets
+                - No background information
+                - Clear timeline and scope
+                - Evidence-based findings
+            - title: Risk Assessment
+              components:
+                - Identified risks
+                - Impact analysis
+                - Control gaps
+                - System implications
+            - title: Risk Rating
+              options:
+                - Critical
+                - High
+                - Medium
+                - Low
+              criteria:
+                - Impact severity
+                - Likelihood
+                - Control effectiveness
+            - title: Management Action
+              format: bullet_points
+              components:
+                - Required actions
+                - Timeline
+                - Responsibilities
+                - Success criteria
+    writing_guidelines:
+        style:
+            - Use passive voice
+            - Avoid personal pronouns
+            - No subjective language
+            - Plain English
+            - Define abbreviations first
+        formatting:
+            - Consistent bullet point structure
+            - Proper comma usage
+            - Single transition words
+            - Parallel structure in lists
+        content:
+            - Focus on risk-based observations
+            - Clear root cause identification
+            - Impact assessment
+            - Compensating controls
+            - Time frame specification
 
 review_transaction_limits:
     description: Analyze transaction approvals against authorized limits
     agent: limit_reviewer
     priority: 1
-    expected_output: A markdown file containing limit-related findings with title, background, discrepancies, and user feedback section
-
+    expected_output: A markdown file containing limit-related findings
+    output_structure:
+        sections:
+            - title: Observation Title
+              requirements:
+                - Subject-focused and concise
+                - Non-negative phrasing
+                - Clear without technical jargon
+            - title: Observation Details
+              format: bullet_points
+              requirements:
+                - Direct and concise points
+                - Logical flow in main and sub-bullets
+                - No background information
+                - Clear timeline and scope
+                - Evidence-based findings
+            - title: Risk Assessment
+              components:
+                - Identified risks
+                - Impact analysis
+                - Control gaps
+                - System implications
+            - title: Risk Rating
+              options:
+                - Critical
+                - High
+                - Medium
+                - Low
+              criteria:
+                - Impact severity
+                - Likelihood
+                - Control effectiveness
+            - title: Management Action
+              format: bullet_points
+              components:
+                - Required actions
+                - Timeline
+                - Responsibilities
+                - Success criteria
+    writing_guidelines:
+        style:
+            - Use passive voice
+            - Avoid personal pronouns
+            - No subjective language
+            - Plain English
+            - Define abbreviations first
+        formatting:
+            - Consistent bullet point structure
+            - Proper comma usage
+            - Single transition words
+            - Parallel structure in lists
+        content:
+            - Focus on risk-based observations
+            - Clear root cause identification
+            - Impact assessment
+            - Compensating controls
+            - Time frame specification
 
 compile_audit_report:
     description: Compile all findings into comprehensive audit report
     agent: audit_report_writer
     priority: 2
     outputs: final_audit_report.md
-    expected_output: A comprehensive audit report with executive summaries, detailed findings, risk ratings, and management actions. Add A section for entire logical access risk rating.
+    expected_output: A comprehensive audit report with structured sections
+    report_structure:
+        sections:
+            - title: Executive Summary
+              components:
+                - Overall risk assessment
+                - Key findings summary
+                - Critical issues highlight
+                - Impact overview
+            - title: Detailed Observations
+              format: per_finding
+              components:
+                - Observation title
+                - Observation details
+                - Risk assessment
+                - Risk rating
+                - Management action
+            - title: Overall Logical Access Risk Assessment
+              components:
+                - Aggregate risk evaluation
+                - Control effectiveness
+                - Systemic issues
+                - Compliance status
+    quality_control:
+        checks:
+            - Grammar and flow
+            - Consistency in risk ratings
+            - Completeness of observations
+            - Action item practicality
+            - Evidence documentation
+        formatting:
+            - Proper section hierarchy
+            - Consistent bullet styling
+            - Clear visual breaks
+            - Professional layout
+    writing_standards:
+        style:
+            - Professional tone
+            - Objective language
+            - Clear and concise
+            - Risk-focused approach
+        content:
+            - Evidence-based findings
+            - Clear impact analysis
+            - Practical recommendations
+            - Measurable outcomes

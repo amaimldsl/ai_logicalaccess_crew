@@ -1,0 +1,19 @@
+review_logical_access:
+    description: Compare system access levels against authorized access matrix
+    agent: logical_access_reviewer
+    priority: 1
+    expected_output: A markdown file containing access-related findings with title, background, discrepancies, and user feedback section
+
+review_transaction_limits:
+    description: Analyze transaction approvals against authorized limits
+    agent: limit_reviewer
+    priority: 1
+    expected_output: A markdown file containing limit-related findings with title, background, discrepancies, and user feedback section
+
+
+compile_audit_report:
+    description: Compile all findings into comprehensive audit report. Create separate observation for each reviewer and each observation should include executive summary, observation , risk, risk rating and management action. Do not assume any carried out action or response yet.
+    agent: audit_report_writer
+    priority: 2
+    outputs: final_audit_report.md
+    expected_output: A comprehensive audit report with executive summaries, detailed findings, risk ratings, and management actions. Add A section for entire logical access risk rating.

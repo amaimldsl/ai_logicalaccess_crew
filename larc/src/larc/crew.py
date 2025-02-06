@@ -70,7 +70,7 @@ class Larc():
         
         self.agent_llm = DEEPSEEK_LLM
 
-        litellm.set_verbose = True
+        #litellm.set_verbose = True
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
     # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
@@ -86,6 +86,7 @@ class Larc():
             config=self.agents_config['logical_access_reviewer'],
             verbose=True,
             llm=self.agent_llm,
+            
         )
 
 
@@ -120,7 +121,7 @@ class Larc():
             config=self.tasks_config['review_logical_access'],
             tools=[self.access_review.access_review_tool],
             llm = self.agent_llm,
-            
+            async_execution=True,
         )
 
     
@@ -130,7 +131,7 @@ class Larc():
             config=self.tasks_config['review_transaction_limits'],
             tools=[self.limit_review.limit_review_tool],
             llm = self.agent_llm,
-            
+            async_execution=True,
             
         )
 
@@ -146,6 +147,7 @@ class Larc():
         return Task(
             config=self.tasks_config['compile_audit_report'],
             llm = self.agent_llm,
+            #context=[self.review_logical_access, self.review_transaction_limits],
             
         )
 
