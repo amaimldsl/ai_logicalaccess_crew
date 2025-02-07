@@ -128,15 +128,156 @@ review_transactions:
     priority: 1
     expected_output: A markdown file containing transaction-related findings with title, background, discrepancies, and user feedback section
 
+
+
+
+
+
+
+
+
+
+
+
 review_audit_trail:
-    description: Compare system changes against change tickets
-    agent: audit_trail_reviewer
-    priority: 1
-    expected_output: A markdown file containing audit trail-related findings with title, background, discrepancies, and user feedback section
+  description: Verify change management compliance and identify potential process violations
+  agent: audit_trail_reviewer
+  priority: 1
+  expected_output: A markdown file containing change management audit findings
+  output_structure:
+    sections:
+      - title: Observation
+        requirements:
+          - Subject-focused and concise
+          - Non-negative phrasing
+          - Clear without technical jargon
+
+      - title: Observation Details
+        format: bullet_points
+        requirements:
+          - Direct and concise points explaining change management discrepancies
+          - Logical flow in main and sub-bullets
+          - No background information
+          - Clear timeline and scope
+          - Evidence-based findings
+
+      - title: Risk Assessment
+        components:
+          - Identified risks in change management process
+          - Impact analysis of non-compliant changes
+          - Control gaps in change execution
+          - System and operational implications
+
+      - title: Risk Rating
+        options:
+          - Critical
+          - High
+          - Medium
+          - Low
+        criteria:
+          - Change management SLA violation severity
+          - Unauthorized user access likelihood
+          - Control effectiveness
+          - Potential system impact
+
+      - title: Management Action
+        format: bullet_points
+        components:
+          - Required corrective actions
+          - User responsibility assignments
+          - Success criteria for process improvement
+
+  writing_guidelines:
+    style:
+      - Use passive voice
+      - Avoid personal pronouns
+      - No subjective language
+      - Plain English
+      - Define abbreviations first
+
+    formatting:
+      - Consistent bullet point structure
+      - Proper comma usage
+      - Single transition words
+      - Parallel structure in lists
+
+    content:
+      - Focus on change management process risks
+      - Clear root cause identification
+      - Impact assessment of non-compliant changes
+      - Recommended compensating controls
+      - Specific time frame specification
 
 
 
+review_transaction_policy:
+  description: Verify transactions are inline with the policy and provide comprehensive analysis of compliance status.
+  agent: transaction_reviewer
+  priority: 1
+  expected_output: A markdown file containing change management audit findings
+  output_structure:
+    sections:
+      - title: Observation
+        requirements:
+          - Subject-focused and concise
+          - Non-negative phrasing
+          - Clear without technical jargon
 
+      - title: Observation Details
+        format: bullet_points
+        requirements:
+          - Direct and concise points explaining change management discrepancies
+          - Logical flow in main and sub-bullets
+          - No background information
+          - Clear timeline and scope
+          - Evidence-based findings
+
+      - title: Risk Assessment
+        components:
+          - Identified risks in change management process
+          - Impact analysis of non-compliant changes
+          - Control gaps in change execution
+          - System and operational implications
+
+      - title: Risk Rating
+        options:
+          - Critical
+          - High
+          - Medium
+          - Low
+        criteria:
+          - Change management SLA violation severity
+          - Unauthorized user access likelihood
+          - Control effectiveness
+          - Potential system impact
+
+      - title: Management Action
+        format: bullet_points
+        components:
+          - Required corrective actions
+          - User responsibility assignments
+          - Success criteria for process improvement
+
+  writing_guidelines:
+    style:
+      - Use passive voice
+      - Avoid personal pronouns
+      - No subjective language
+      - Plain English
+      - Define abbreviations first
+
+    formatting:
+      - Consistent bullet point structure
+      - Proper comma usage
+      - Single transition words
+      - Parallel structure in lists
+
+    content:
+      - Focus on change management process risks
+      - Clear root cause identification
+      - Impact assessment of non-compliant changes
+      - Recommended compensating controls
+      - Specific time frame specification
 
 
 

@@ -2,8 +2,11 @@ from crewai import Agent, Crew, Process, Task,LLM
 from crewai.project import CrewBase, agent, crew, task
 from tools.access_review import AccessReview
 from tools.transaction_approval_review import TransactionApprovalReview
+from tools.change_management_verification import ChangeManagementVerification
+from tools.transaction_policy_review import TransactionPolicyReview
 import os
 import litellm
+
         
 
 @CrewBase
@@ -80,6 +83,9 @@ class Larc():
 
     access_review = AccessReview()
     limit_review = TransactionApprovalReview()
+    trail_review = ChangeManagementVerification()
+    trans_policy_review = TransactionPolicyReview()
+
 
     @agent
     def logical_access_reviewer(self) -> Agent:
@@ -100,6 +106,21 @@ class Larc():
             llm=self.agent_llm,
         )
     
+    @agent
+    def transaction_reviewer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['transaction_reviewer'],
+            verbose=True,
+            llm=self.agent_llm,
+        )
+    
+    @agent
+    def audit_trail_reviewer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['audit_trail_reviewer'],
+            verbose=True,
+            llm=self.agent_llm,
+        )
 
 
 
@@ -122,7 +143,8 @@ class Larc():
             config=self.tasks_config['review_logical_access'],
             tools=[self.access_review.access_review_tool],
             llm = self.agent_llm,
-            async_execution=True,
+            #async_execution=True,
+            output_file="findings/LogicalAccessObservation.md",
         )
 
     
@@ -132,11 +154,33 @@ class Larc():
             config=self.tasks_config['review_transaction_limits'],
             tools=[self.limit_review.limit_review_tool],
             llm = self.agent_llm,
-            async_execution=True,
-            
+            #async_execution=True,
+            output_file="findings/TransactionsLimitsObservation.md",
         )
 
     
+    @task
+    def review_audit_trail(self) -> Task:
+        return Task(
+            config=self.tasks_config['review_audit_trail'],
+            tools=[self.trail_review.change_management_verification_tool],
+            llm = self.agent_llm,
+            #async_execution=True,
+            output_file="findings/AuditTrailObservation.md",
+            
+        )
+    
+    @task
+    def review_transaction_policy(self) -> Task:
+        return Task(
+            config=self.tasks_config['review_transaction_policy'],
+            tools=[self.trans_policy_review.transaction_policy_review_tool],
+            llm = self.agent_llm,
+            #async_execution=True,
+            output_file="findings/TransactionsComplObservation.md",
+            
+        )
+
     
     
     
@@ -149,6 +193,7 @@ class Larc():
             config=self.tasks_config['compile_audit_report'],
             llm = self.agent_llm,
             #context=[self.review_logical_access, self.review_transaction_limits],
+            output_file="DraftAuditReport.md",
             
         )
 

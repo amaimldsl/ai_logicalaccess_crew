@@ -16,6 +16,14 @@ limit_reviewer:
     allow_delegation: false
 
 
+audit_trail_reviewer:
+    role: Change Management Compliance Analyst
+    goal: Analyze audit trail records against change management policies and identify process deviations
+    backstory: Seasoned IT governance professional with extensive experience in tracking and validating change management processes, ensuring organizational compliance and operational integrity
+    verbose: true
+    memory: true
+    allow_delegation: false
+
 transaction_reviewer:
     role: Transaction Policy Compliance Specialist
     goal: Analyze transactions for policy violations and document findings
@@ -23,15 +31,6 @@ transaction_reviewer:
     verbose: true
     memory: true
     allow_delegation: false
-
-audit_trail_reviewer:
-    role: System Change Audit Specialist
-    goal: Compare system changes against change tickets to identify unauthorized modifications
-    backstory: Specialized in system audit analysis with expertise in identifying unauthorized or undocumented system changes
-    verbose: true
-    memory: true
-    allow_delegation: false
-
 
 
 audit_report_writer:

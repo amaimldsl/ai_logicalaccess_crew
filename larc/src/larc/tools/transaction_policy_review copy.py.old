@@ -1,0 +1,79 @@
+from crewai.tools import tool
+from crewai import LLM
+import csv
+import PyPDF2
+from pathlib import Path
+
+class TransactionPolicyReview:
+    @tool("transaction_policy_review_tool")
+    def transaction_policy_review_tool(agent_llm: LLM) -> list:
+        """
+        Review transactions against a specified policy using an LLM for compliance checking.
+        
+        Returns:
+        list: Transactions with violation assessments
+        """
+        # Path setup
+        base_dir = Path(__file__).resolve().parent
+        data_dir = base_dir.parent / 'data'
+        docs_dir = data_dir
+
+        # File paths
+        csv_path = data_dir / 'transaction_records.csv'
+        pdf_path = docs_dir / 'transaction_policy.pdf'
+
+        # Load transactions from CSV
+        def load_transactions(csv_file):
+            transactions = []
+            with open(csv_file, mode='r') as file:
+                csv_reader = csv.DictReader(file)
+                for row in csv_reader:
+                    transactions.append(row)
+            return transactions
+
+        # Extract policy text from PDF
+        def extract_policy_text(pdf_file):
+            with open(pdf_file, 'rb') as file:
+                reader = PyPDF2.PdfReader(file)
+                policy_text = ""
+                for page_num in range(len(reader.pages)):
+                    policy_text += reader.pages[page_num].extract_text()
+            return policy_text
+
+        # Check transaction against policy using LLM
+        def check_transaction_against_policy(transaction, policy_text):
+            # Convert the transaction dictionary to a string format
+            transaction_str = ', '.join(f"{key}: {value}" for key, value in transaction.items())
+            
+            # Format the conversation as a list of messages
+            messages = [
+                {"role": "system", "content": "You are a policy compliance assistant."},
+                {"role": "user", "content": f"Given the following policy:\n\n{policy_text}\n\nDoes the following transaction violate any policy constraints? Transaction: {transaction_str}\nAnswer 'Yes' or 'No' and explain the violation if applicable."}
+            ]
+            
+                       
+            # Get the response from the model
+            result = agent_llm.invoke(messages)
+            
+            return result.content
+
+        # Main review process
+        try:
+            # Load transactions and policy
+            transactions = load_transactions(csv_path)
+            policy_text = extract_policy_text(pdf_path)
+
+            # Analyze each transaction
+            for transaction in transactions:
+                violation_result = check_transaction_against_policy(transaction, policy_text)
+                transaction['policy_compliance'] = violation_result
+
+            return transactions
+
+        except Exception as e:
+            return [{"error": str(e)}]
+
+# Example usage:
+# results = TransactionPolicyReviewTool.transaction_policy_review_tool()
+# for result in results:
+#     print(result)
