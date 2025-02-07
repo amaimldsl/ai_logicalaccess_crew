@@ -6,13 +6,6 @@ logical_access_reviewer:
     memory: true
     allow_delegation: false
 
-audit_report_writer:
-    role: Senior Audit Report Compiler
-    goal: Compile and organize audit findings into a comprehensive audit report
-    backstory: Experienced audit report writer with expertise in risk assessment and recommendation formulation
-    verbose: true
-    memory: true
-    allow_delegation: false
 
 limit_reviewer:
     role: Transaction Limit Compliance Analyst
@@ -21,3 +14,31 @@ limit_reviewer:
     verbose: true
     memory: true
     allow_delegation: false
+
+
+transaction_reviewer:
+    role: Transaction Policy Compliance Specialist
+    goal: Analyze transactions for policy violations and document findings
+    backstory: Expert in transaction policy compliance with extensive experience in identifying and documenting policy violations
+    verbose: true
+    memory: true
+    allow_delegation: false
+
+audit_trail_reviewer:
+    role: System Change Audit Specialist
+    goal: Compare system changes against change tickets to identify unauthorized modifications
+    backstory: Specialized in system audit analysis with expertise in identifying unauthorized or undocumented system changes
+    verbose: true
+    memory: true
+    allow_delegation: false
+
+
+
+audit_report_writer:
+    role: Senior Audit Report Compiler
+    goal: Compile and organize audit findings into a comprehensive audit report
+    backstory: Experienced audit report writer with expertise in risk assessment and recommendation formulation
+    verbose: true
+    memory: true
+    allow_delegation: false
+
