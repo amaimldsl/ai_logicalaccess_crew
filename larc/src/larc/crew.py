@@ -66,7 +66,8 @@ class Larc():
         LLAMA31_LLM = LLM(model="ollama/llama3.1")
         MISTRAL_LLM = LLM(model="ollama/mistral")
         LLAMA32_LLM = LLM(model="ollama/llama3.2")
-        DEEPSEEK_LCL_LLM =  LLM(model="ollama/deepseek-r1")
+        DEEPSEEK_LCL_DF_LLM =  LLM(model="ollama/deepseek-r1")
+        DEEPSEEK_LCL_14B_LLM =  LLM(model="ollama/deepseek-r1:14b")
         
         self.agent_llm = DEEPSEEK_LLM
 
