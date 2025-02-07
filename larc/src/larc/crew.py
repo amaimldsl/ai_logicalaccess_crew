@@ -71,7 +71,7 @@ class Larc():
         
         self.agent_llm = DEEPSEEK_LLM
 
-        #litellm.set_verbose = True
+    #litellm.set_verbose = True
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
     # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
