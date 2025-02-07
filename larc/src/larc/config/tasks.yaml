@@ -5,7 +5,7 @@ review_logical_access:
     expected_output: A markdown file containing access-related findings
     output_structure:
         sections:
-            - title: Observation Title
+            - title: Observation 
               requirements:
                 - Subject-focused and concise
                 - Non-negative phrasing
@@ -13,7 +13,7 @@ review_logical_access:
             - title: Observation Details
               format: bullet_points
               requirements:
-                - Direct and concise points
+                - Direct and concise points that explains the noted discrepancies.
                 - Logical flow in main and sub-bullets
                 - No background information
                 - Clear timeline and scope
@@ -38,7 +38,6 @@ review_logical_access:
               format: bullet_points
               components:
                 - Required actions
-                - Timeline
                 - Responsibilities
                 - Success criteria
     writing_guidelines:
@@ -75,7 +74,7 @@ review_transaction_limits:
             - title: Observation Details
               format: bullet_points
               requirements:
-                - Direct and concise points
+                - Direct and concise points that explains the noted discrepancies.
                 - Logical flow in main and sub-bullets
                 - No background information
                 - Clear timeline and scope
@@ -130,28 +129,23 @@ compile_audit_report:
     expected_output: A comprehensive audit report with structured sections
     report_structure:
         sections:
-            - title: Executive Summary
+            - title: Executive Summary for the overall observations
               components:
                 - Overall risk assessment
                 - Key findings summary
                 - Critical issues highlight
                 - Impact overview
             - title: Detailed Observations
-              format: per_finding
+              format: per_finding (repeat for every observation)
               components:
                 - Observation title
                 - Observation details
                 - Risk assessment
                 - Risk rating
-                - Management action
-            - title: Overall Logical Access Risk Assessment
-              components:
-                - Aggregate risk evaluation
-                - Control effectiveness
-                - Systemic issues
-                - Compliance status
+                - Management action            
     quality_control:
         checks:
+            - Direct and concise points that explains the noted discrepancies.
             - Grammar and flow
             - Consistency in risk ratings
             - Completeness of observations
