@@ -40,9 +40,9 @@ class AccessReview:
                     if actual_access == expected_access:
                         result = f"user has actual access level of {actual_access} which is matching his {system} level in access matrix."
                     else:
-                        result = f"user has actual {system} access level of {actual_access} in AR while he should have {system} access level as {expected_access} according to the access matrix."
+                        result = f"user has actual {system} access level of {actual_access} in Access Report while he should have {system} access level as {expected_access} according to the access matrix."
                 else:
-                    result = f"user has {system} access level of {actual_access} in AR while he is unauthorized to have access to {system} according to access matrix."
+                    result = f"user has {system} access level of {actual_access} in Access Report while he is unauthorized to have access to {system} according to access matrix."
                 
                 review_results[system] = result
             

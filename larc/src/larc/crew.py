@@ -6,6 +6,8 @@ from tools.change_management_verification import ChangeManagementVerification
 from tools.transaction_policy_review import TransactionPolicyReview
 import os
 import litellm
+from pathlib import Path
+from typing import List, Dict
 
         
 
@@ -182,33 +184,46 @@ class Larc():
         )
 
     
-    
-    
+
     @task
     def compile_audit_report(self) -> Task:
-        def read_findings():
-            """Basic function to read findings from the findings folder"""
+        def read_findings() -> List[Dict[str, str]]:
+            """
+            Read findings from the findings directory
+            Returns a list of dictionaries containing source and content
+            """
             findings = []
-            findings_dir = "findings"
+            findings_dir = Path("findings")
             
-            if os.path.exists(findings_dir):
-                for filename in os.listdir(findings_dir):
-                    if filename.endswith('.md'):
-                        file_path = os.path.join(findings_dir, filename)
-                        with open(file_path, 'r') as f:
+            try:
+                findings_dir.mkdir(exist_ok=True)
+                
+                for file_path in findings_dir.glob("*.md"):
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
                             findings.append({
-                                'source': filename,
-                                'content': f.read()
+                                'source': file_path.name,
+                                'content': f.read().strip()
                             })
+                    except Exception as e:
+                        print(f"Error reading file {file_path}: {e}")
+                        continue
+                        
+            except Exception as e:
+                print(f"Error accessing findings directory: {e}")
+                return []
+                
             return findings
 
+        # Get findings context
+        findings = read_findings()
+        context_list = [f"Finding from {f['source']}: {f['content']}" for f in findings]
+        
         return Task(
             config=self.tasks_config['compile_audit_report'],
             llm=self.agent_llm,
-            context=[f"Finding from {f['source']}: {f['content']}" for f in read_findings()],
             output_file="DraftAuditReport.md"
         )
-
             
 
     @crew
