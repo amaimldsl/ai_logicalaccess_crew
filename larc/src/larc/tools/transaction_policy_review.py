@@ -21,7 +21,8 @@ class TransactionPolicyReview:
         """
         # Path setup
         base_dir = Path(__file__).resolve().parent
-        data_dir = base_dir.parent / 'data'
+        #data_dir = base_dir.parent / 'data'
+        data_dir =  base_dir / 'data'
         docs_dir = data_dir
 
         # File paths
@@ -48,6 +49,7 @@ class TransactionPolicyReview:
                     policy_text += reader.pages[page_num].extract_text()
             return policy_text
 
+
         def check_transaction_against_policy(transaction_details, policy_text):
             transaction_str = ', '.join(f"{key}: {value}" for key, value in transaction_details.items())
             
@@ -69,29 +71,23 @@ class TransactionPolicyReview:
                 """}
             ]
 
-            #EEPSEEK_LLM = LLM(
-            model= os.getenv('DEEPSEEK_MODEL')
-            api_key=os.getenv('DEEPSEEK_API_KEY')
-            base_url=os.getenv('DEEPSEEK_BASE_URL')
-            #)
-            
+            # Get environment variables
+            model = os.getenv('DEEPSEEK_MODEL')
+            api_key = os.getenv('DEEPSEEK_API_KEY')
+            base_url = os.getenv('DEEPSEEK_API_BASE')
 
-            # Please install OpenAI SDK first: `pip3 install openai`
-
-            
+            # Initialize OpenAI client
             client = OpenAI(api_key=api_key, base_url=base_url)
 
+            # Get completion
             result = client.chat.completions.create(
                 model=model,
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant"},
-                    {"role": "user", "content": messages},
-                ],
+                messages=messages,
                 stream=False
             )
-
-           
-            return result.content
+            
+            # Extract the response content correctly
+            return result.choices[0].message.content
 
         try:
             # Load data
