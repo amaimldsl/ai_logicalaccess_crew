@@ -281,54 +281,99 @@ review_transaction_policy:
 
 
 
-
-
-
-
-
 compile_audit_report:
-    description: Compile all findings into comprehensive audit report
+    description: Compile all findings from findings folder into comprehensive audit report
     agent: audit_report_writer
     priority: 2
-    outputs: final_audit_report.md
+    input_path: findings/*.md
+    output_file: DraftAuditReport.md
     expected_output: A comprehensive audit report with structured sections
     report_structure:
         sections:
-            - title: Executive Summary for the overall observations
+            - title: Executive Summary
+              required: true
               components:
-                - Overall risk assessment
-                - Key findings summary
-                - Critical issues highlight
-                - Impact overview
+                - title: Critical Issues
+                  content: Aggregated list of all findings with Critical risk rating
+                  format: bullet_points
+                
+                - title: High Risk Issues
+                  content: Aggregated list of all findings with High risk rating
+                  format: bullet_points
+                
+                - title: Key Findings Overview
+                  content: Summary of all major observations
+                  format: bullet_points
+                
+                - title: Risk Profile
+                  content: Distribution of risk ratings across findings
+                  format: table
+                  columns:
+                    - Risk Rating
+                    - Count
+                    - Percentage
+            
             - title: Detailed Observations
-              format: per_finding (repeat for every observation)
-              components:
-                - Observation title
-                - Observation details
-                - Risk assessment
-                - Risk rating
-                - Management action            
+              required: true
+              structure: per_finding
+              source: findings_folder
+              sections_to_include:
+                - Observation
+                - Observation Details
+                - Risk Assessment
+                - Risk Rating
+                - Management Action
+              formatting:
+                - Preserve original section hierarchy
+                - Maintain bullet point structure
+                - Keep original risk ratings
+                - Include source file reference
+    
+    compilation_rules:
+        finding_selection:
+            - Include all .md files from findings folder
+            - Parse headers using markdown structure
+            - Preserve original formatting within sections
+        
+        executive_summary:
+            - Aggregate all Critical and High risks first
+            - Summarize key points from each finding
+            - Calculate risk distribution statistics
+            - Present trends and patterns
+        
+        detailed_findings:
+            - Group by finding source
+            - Maintain original section order
+            - Preserve all formatting and lists
+            - Include full observation details
+    
     quality_control:
         checks:
-            - Direct and concise points that explains the noted discrepancies.
-            - Grammar and flow
-            - Consistency in risk ratings
-            - Completeness of observations
-            - Action item practicality
-            - Evidence documentation
-        formatting:
+            - All required sections present
+            - Consistent risk rating usage
+            - Complete management actions
             - Proper section hierarchy
-            - Consistent bullet styling
-            - Clear visual breaks
+            - Evidence documentation
+        
+        formatting:
+            - Consistent header levels
+            - Proper bullet point structure
+            - Clear section breaks
             - Professional layout
+            - Proper citation of source findings
+    
     writing_standards:
         style:
             - Professional tone
             - Objective language
             - Clear and concise
             - Risk-focused approach
+        
         content:
             - Evidence-based findings
             - Clear impact analysis
             - Practical recommendations
             - Measurable outcomes
+            - Source traceability
+
+

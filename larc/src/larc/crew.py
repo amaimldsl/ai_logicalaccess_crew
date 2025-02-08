@@ -177,25 +177,39 @@ class Larc():
             tools=[self.trans_policy_review.transaction_policy_review_tool],
             llm = self.agent_llm,
             #async_execution=True,
-            output_file="findings/TransactionsComplObservation.md",
+            output_file="findings/TransactionsComplianceObservation.md",
             
         )
 
     
     
     
-    
-    
-    
     @task
     def compile_audit_report(self) -> Task:
+        def read_findings():
+            """Basic function to read findings from the findings folder"""
+            findings = []
+            findings_dir = "findings"
+            
+            if os.path.exists(findings_dir):
+                for filename in os.listdir(findings_dir):
+                    if filename.endswith('.md'):
+                        file_path = os.path.join(findings_dir, filename)
+                        with open(file_path, 'r') as f:
+                            findings.append({
+                                'source': filename,
+                                'content': f.read()
+                            })
+            return findings
+
         return Task(
             config=self.tasks_config['compile_audit_report'],
-            llm = self.agent_llm,
-            #context=[self.review_logical_access, self.review_transaction_limits],
-            output_file="DraftAuditReport.md",
-            
+            llm=self.agent_llm,
+            context=[f"Finding from {f['source']}: {f['content']}" for f in read_findings()],
+            output_file="DraftAuditReport.md"
         )
+
+            
 
     @crew
     def crew(self) -> Crew:
