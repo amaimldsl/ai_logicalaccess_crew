@@ -194,15 +194,23 @@ class Larc():
     def compile_audit_report(self) -> Task:
         def read_findings() -> List[Dict[str, str]]:
             """
-            Read findings from the findings directory
+            Read findings from the findings directory relative to the current script location
             Returns a list of dictionaries containing source and content
             """
             findings = []
-            findings_dir = Path("findings")
+            
+            # Get the directory of the currently executing script
+            current_dir = Path(os.path.dirname(os.path.abspath(__file__)))
+            findings_dir = current_dir / "findings"
             
             try:
                 findings_dir.mkdir(exist_ok=True)
                 
+                # Check if directory exists and is accessible
+                if not findings_dir.is_dir():
+                    print(f"Findings directory not found at {findings_dir}")
+                    return []
+                    
                 for file_path in findings_dir.glob("*.md"):
                     try:
                         with open(file_path, 'r', encoding='utf-8') as f:
@@ -218,6 +226,9 @@ class Larc():
                 print(f"Error accessing findings directory: {e}")
                 return []
                 
+            if not findings:
+                print(f"No .md files found in {findings_dir}")
+                
             return findings
 
         # Get findings context
@@ -227,6 +238,7 @@ class Larc():
         return Task(
             config=self.tasks_config['compile_audit_report'],
             llm=self.agent_llm,
+            context=context_list,  # Added context to the Task
             output_file="DraftAuditReport.md"
         )
             
