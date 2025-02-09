@@ -72,14 +72,10 @@ class Larc():
         LLAMA31_LLM = LLM(model="ollama/llama3.1")
         MISTRAL_LLM = LLM(model="ollama/mistral")
         LLAMA32_LLM = LLM(model="ollama/llama3.2")
-        LLAMA33_LLM = LLM(model="ollama/llama3.3")
-        MIXTRAL_LLM = LLM(model="ollama/mixtral")
-        
-        DEEPSEEK_LC_DF_LLM =  LLM(model="ollama/deepseek-r1")
+        DEEPSEEK_LCL_DF_LLM =  LLM(model="ollama/deepseek-r1")
         DEEPSEEK_LCL_14B_LLM =  LLM(model="ollama/deepseek-r1:14b")
-        DEEPSEEK_LCL_32B_LLM =  LLM(model="ollama/deepseek-r1:32b")
         
-        self.agent_llm = LLAMA31_LLM
+        self.agent_llm = DEEPSEEK_LLM
 
     #litellm.set_verbose = True
     # Learn more about YAML configuration files here:
