@@ -5,7 +5,7 @@ from crewai.tools import tool
 import pandas as pd
 from pathlib import Path
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-import litellm
+import litellm, time
 
 class AccessReview:
 
@@ -17,6 +17,7 @@ class AccessReview:
         Returns:
         dict: Dictionary containing access review results for each user.
         """
+
         try:
             # Path setup
             base_dir = Path(__file__).resolve().parent  # path to tool.py

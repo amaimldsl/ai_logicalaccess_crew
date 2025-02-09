@@ -1,6 +1,7 @@
 from crewai.tools import tool
 import pandas as pd
 from pathlib import Path
+import time
 
 
 
@@ -14,6 +15,11 @@ class TransactionApprovalReview:
         Returns:
             str: Detailed analysis of transaction approvals
         """
+
+        print("Limit Tool -- Waiting for 2 minutes...")
+        time.sleep(120)  # 120 seconds = 2 minutes
+        print("2 minutes have passed!")
+
         # Determine file paths
         base_dir = Path(__file__).resolve().parent
         data_dir = base_dir.parent / 'data'
