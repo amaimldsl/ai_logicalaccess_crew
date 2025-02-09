@@ -12,10 +12,7 @@ class TransactionPolicyReview:
     def transaction_policy_review_tool():
         """Reviews all transactions against policy document using LLM analysis.
         Returns list of transactions with violation status."""
-        
-        print("Policy Tool -- Waiting for 2 minutes...")
-        time.sleep(120)  # 120 seconds = 2 minutes
-        print("2 minutes have passed!")
+      
         
         # File paths relative to tool directory
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

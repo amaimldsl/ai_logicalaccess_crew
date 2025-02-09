@@ -1,102 +1,114 @@
 # Access Review Findings
 
-## USER001
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of maker in Access Report while he should have system_b_access access level as checker according to the access matrix.
-- **system_c_access**: user has actual access level of read-only which is matching his system_c_access level in access matrix.
+## Summary of Findings
+The access review identified several discrepancies between the actual access levels and the authorized access matrix. Below is a detailed breakdown of the findings for each user.
 
-## USER002
-- **system_a_access**: user has actual access level of checker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of maker in Access Report while he should have system_b_access access level as read-only according to the access matrix.
-- **system_c_access**: user has actual access level of maker which is matching his system_c_access level in access matrix.
+---
 
-## USER003
-- **system_a_access**: user has actual system_a_access access level of maker in Access Report while he should have system_a_access access level as read-only according to the access matrix.
-- **system_b_access**: user has actual access level of maker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of checker which is matching his system_c_access level in access matrix.
+## Detailed Findings
 
-## USER004
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of maker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of maker which is matching his system_c_access level in access matrix.
+### USER001
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the authorized matrix (read-only).
 
-## USER005
-- **system_a_access**: user has actual access level of checker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of maker in Access Report while he should have system_b_access access level as checker according to the access matrix.
-- **system_c_access**: user has actual access level of checker which is matching his system_c_access level in access matrix.
+### USER002
+- **system_a_access**: Access level matches the authorized matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
+- **system_c_access**: Access level matches the authorized matrix (maker).
 
-## USER006
-- **system_a_access**: user has actual access level of read-only which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of read-only which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual system_c_access access level of maker in Access Report while he should have system_c_access access level as read-only according to the access matrix.
+### USER003
+- **system_a_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
+- **system_b_access**: Access level matches the authorized matrix (maker).
+- **system_c_access**: Access level matches the authorized matrix (checker).
 
-## USER007
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of checker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of maker which is matching his system_c_access level in access matrix.
+### USER004
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Access level matches the authorized matrix (maker).
+- **system_c_access**: Access level matches the authorized matrix (maker).
 
-## USER008
-- **system_a_access**: user has actual access level of checker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of maker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual system_c_access access level of read-only in Access Report while he should have system_c_access access level as checker according to the access matrix.
+### USER005
+- **system_a_access**: Access level matches the authorized matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the authorized matrix (checker).
 
-## USER009
-- **system_a_access**: user has actual system_a_access access level of checker in Access Report while he should have system_a_access access level as read-only according to the access matrix.
-- **system_b_access**: user has actual access level of checker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of read-only which is matching his system_c_access level in access matrix.
+### USER006
+- **system_a_access**: Access level matches the authorized matrix (read-only).
+- **system_b_access**: Access level matches the authorized matrix (read-only).
+- **system_c_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
 
-## USER010
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of read-only which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual system_c_access access level of maker in Access Report while he should have system_c_access access level as checker according to the access matrix.
+### USER007
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Access level matches the authorized matrix (checker).
+- **system_c_access**: Access level matches the authorized matrix (maker).
 
-## USER021
-- **system_a_access**: user has system_a_access access level of maker in Access Report while he is unauthorized to have access to system_a_access according to access matrix.
-- **system_b_access**: user has system_b_access access level of read-only in Access Report while he is unauthorized to have access to system_b_access according to access matrix.
-- **system_c_access**: user has system_c_access access level of checker in Access Report while he is unauthorized to have access to system_c_access according to access matrix.
+### USER008
+- **system_a_access**: Access level matches the authorized matrix (checker).
+- **system_b_access**: Access level matches the authorized matrix (maker).
+- **system_c_access**: Discrepancy found. Actual access level is `read-only`, but should be `checker`.
 
-## USER012
-- **system_a_access**: user has actual access level of read-only which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of maker in Access Report while he should have system_b_access access level as checker according to the access matrix.
-- **system_c_access**: user has actual access level of maker which is matching his system_c_access level in access matrix.
+### USER009
+- **system_a_access**: Discrepancy found. Actual access level is `checker`, but should be `read-only`.
+- **system_b_access**: Access level matches the authorized matrix (checker).
+- **system_c_access**: Access level matches the authorized matrix (read-only).
 
-## USER013
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of maker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of checker which is matching his system_c_access level in access matrix.
+### USER010
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Access level matches the authorized matrix (read-only).
+- **system_c_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
 
-## USER014
-- **system_a_access**: user has actual access level of checker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of checker in Access Report while he should have system_b_access access level as read-only according to the access matrix.
-- **system_c_access**: user has actual access level of read-only which is matching his system_c_access level in access matrix.
+### USER021
+- **system_a_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
+- **system_b_access**: Unauthorized access. Actual access level is `read-only`, but user is unauthorized.
+- **system_c_access**: Unauthorized access. Actual access level is `checker`, but user is unauthorized.
 
-## USER022
-- **system_a_access**: user has system_a_access access level of read-only in Access Report while he is unauthorized to have access to system_a_access according to access matrix.
-- **system_b_access**: user has system_b_access access level of maker in Access Report while he is unauthorized to have access to system_b_access according to access matrix.
-- **system_c_access**: user has system_c_access access level of maker in Access Report while he is unauthorized to have access to system_c_access according to access matrix.
+### USER012
+- **system_a_access**: Access level matches the authorized matrix (read-only).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the authorized matrix (maker).
 
-## USER016
-- **system_a_access**: user has actual access level of maker which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual system_b_access access level of maker in Access Report while he should have system_b_access access level as checker according to the access matrix.
-- **system_c_access**: user has actual access level of checker which is matching his system_c_access level in access matrix.
+### USER013
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Access level matches the authorized matrix (maker).
+- **system_c_access**: Access level matches the authorized matrix (checker).
 
-## USER017
-- **system_a_access**: user has actual system_a_access access level of maker in Access Report while he should have system_a_access access level as checker according to the access matrix.
-- **system_b_access**: user has actual access level of maker which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of read-only which is matching his system_c_access level in access matrix.
+### USER014
+- **system_a_access**: Access level matches the authorized matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `checker`, but should be `read-only`.
+- **system_c_access**: Access level matches the authorized matrix (read-only).
 
-## USER018
-- **system_a_access**: user has actual access level of read-only which is matching his system_a_access level in access matrix.
-- **system_b_access**: user has actual access level of read-only which is matching his system_b_access level in access matrix.
-- **system_c_access**: user has actual access level of maker which is matching his system_c_access level in access matrix.
+### USER022
+- **system_a_access**: Unauthorized access. Actual access level is `read-only`, but user is unauthorized.
+- **system_b_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
+- **system_c_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
 
-## USER023
-- **system_a_access**: user has system_a_access access level of maker in Access Report while he is unauthorized to have access to system_a_access according to access matrix.
-- **system_b_access**: user has system_b_access access level of checker in Access Report while he is unauthorized to have access to system_b_access according to access matrix.
-- **system_c_access**: user has system_c_access access level of read-only in Access Report while he is unauthorized to have access to system_c_access according to access matrix.
+### USER016
+- **system_a_access**: Access level matches the authorized matrix (maker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the authorized matrix (checker).
 
-## USER024
-- **system_a_access**: user has system_a_access access level of checker in Access Report while he is unauthorized to have access to system_a_access according to access matrix.
-- **system_b_access**: user has system_b_access access level of maker in Access Report while he is unauthorized to have access to system_b_access according to access matrix.
-- **system_c_access**: user has system_c_access access level of maker in Access Report while he is unauthorized to have access to system_c_access according to access matrix.
+### USER017
+- **system_a_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_b_access**: Access level matches the authorized matrix (maker).
+- **system_c_access**: Access level matches the authorized matrix (read-only).
+
+### USER018
+- **system_a_access**: Access level matches the authorized matrix (read-only).
+- **system_b_access**: Access level matches the authorized matrix (read-only).
+- **system_c_access**: Access level matches the authorized matrix (maker).
+
+### USER023
+- **system_a_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
+- **system_b_access**: Unauthorized access. Actual access level is `checker`, but user is unauthorized.
+- **system_c_access**: Unauthorized access. Actual access level is `read-only`, but user is unauthorized.
+
+### USER024
+- **system_a_access**: Unauthorized access. Actual access level is `checker`, but user is unauthorized.
+- **system_b_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
+- **system_c_access**: Unauthorized access. Actual access level is `maker`, but user is unauthorized.
+
+---
+
+## Conclusion
+The access review identified multiple discrepancies and unauthorized access instances. Immediate action is recommended to align access levels with the authorized matrix and revoke unauthorized access.
 ```

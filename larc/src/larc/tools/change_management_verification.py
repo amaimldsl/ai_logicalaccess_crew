@@ -14,10 +14,7 @@ class ChangeManagementVerification:
         Returns:
         dict: Verification results for each audit trail record
         """
-        print("Trail Tool -- Waiting for 2 minutes...")
-        time.sleep(120)  # 120 seconds = 2 minutes
-        print("2 minutes have passed!")
-        
+    
         # Paths to input files
         base_dir = Path(__file__).resolve().parent
         data_dir = base_dir.parent / 'data'
