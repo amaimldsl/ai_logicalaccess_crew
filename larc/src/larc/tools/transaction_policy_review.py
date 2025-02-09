@@ -1,138 +1,55 @@
+# tool/transaction_policy_review_tool.py
 from crewai.tools import tool
-from crewai import LLM
 import csv
 import PyPDF2
-from pathlib import Path
-from typing import Dict, Any
-from pydantic import BaseModel, Field
-import datetime, os
-from openai import OpenAI
-from tqdm import tqdm  # Import the tqdm library for progress bars
+from langchain_ollama import ChatOllama
+from tqdm import tqdm
+import os
 
-import datetime
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-import litellm
 
 class TransactionPolicyReview:
     @tool("transaction_policy_review_tool")
-    def transaction_policy_review_tool() -> Dict[str, Any]:
-        """
-        Review transactions against a specified policy using an LLM for compliance checking.
+    def transaction_policy_review_tool():
+        """Reviews all transactions against policy document using LLM analysis.
+        Returns list of transactions with violation status."""
         
-        Returns:
-        dict: Dictionary containing transaction details and their policy compliance analysis
-        """
-        # Path setup
-        base_dir = Path(__file__).resolve().parent
-        parent_folder = base_dir.parent
-        data_dir = parent_folder / 'data'
-        docs_dir = data_dir
-
-        # File paths
-        csv_path = data_dir / 'transaction_records.csv'
-        pdf_path = docs_dir / 'transaction_policy.pdf'
-
-        def load_transactions(csv_file):
-            transactions = {}
-            with open(csv_file, mode='r') as file:
-                csv_reader = csv.DictReader(file)
-                for idx, row in enumerate(csv_reader, 1):
-                    transaction_id = f"transaction_{idx}"
-                    transactions[transaction_id] = {
-                        "details": row,
-                        "policy_compliance": None
-                    }
-            return transactions
-
-        def extract_policy_text(pdf_file):
-            with open(pdf_file, 'rb') as file:
+        # File paths relative to tool directory
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        CSV_PATH = os.path.join(BASE_DIR, 'data', 'transaction_records.csv')
+        PDF_PATH = os.path.join(BASE_DIR, 'data', 'transaction_policy.pdf')
+        
+        # Load transactions and policy
+        def load_transactions():
+            with open(CSV_PATH, 'r') as file:
+                return [row for row in csv.DictReader(file)]
+        
+        def extract_policy():
+            with open(PDF_PATH, 'rb') as file:
                 reader = PyPDF2.PdfReader(file)
-                policy_text = ""
-                for page_num in range(len(reader.pages)):
-                    policy_text += reader.pages[page_num].extract_text()
-            return policy_text
-
-        @retry(
-            stop=stop_after_attempt(3),  # Retry up to 3 times
-            wait=wait_exponential(multiplier=1, min=4, max=10),  # Exponential backoff
-            retry=retry_if_exception_type(litellm.exceptions.APIError)  # Retry on APIError
-        )
-        def check_transaction_against_policy(transaction_details, policy_text):
-            transaction_str = ', '.join(f"{key}: {value}" for key, value in transaction_details.items())
-            
+                return ''.join(page.extract_text() for page in reader.pages)
+        
+        # LLM configuration
+        LLM_MODEL = "llama3.1"
+        chat_ollama = ChatOllama(model=LLM_MODEL)
+        
+        # Process transactions
+        transactions = load_transactions()
+        policy_text = extract_policy()
+        
+        for transaction in tqdm(transactions, desc="Policy Review"):
+            transaction_str = ', '.join(f"{k}: {v}" for k, v in transaction.items())
             messages = [
-                {"role": "system", "content": "You are a policy compliance assistant. Analyze the transaction and provide a detailed compliance assessment."},
-                {"role": "user", "content": f"""
-                Review this transaction against the policy and provide a structured response:
-                
-                Policy:
-                {policy_text}
-                
-                Transaction:
-                {transaction_str}
-                
-                Please provide:
-                1. Compliance Status (Compliant/Non-Compliant)
-                2. Detailed explanation
-                3. Specific policy rules referenced
-                """}
-            ]
-
-            # Get environment variables
-            model = os.getenv('DEEPSEEK_MODEL')
-            api_key = os.getenv('DEEPSEEK_API_KEY')
-            base_url = os.getenv('DEEPSEEK_API_BASE')
-
-            # Initialize OpenAI client
-            client = OpenAI(api_key=api_key, base_url=base_url)
-
-            # Get completion
-            result = client.chat.completions.create(
-                model=model,
-                messages=messages,
-                stream=False
-            )
-            
-            # Extract the response content correctly
-            return result.choices[0].message.content
-
-        try:
-            # Load data with progress bar
-            transactions = load_transactions(csv_path)
-            policy_text = extract_policy_text(pdf_path)
-
-            # Create response structure
-            response = {
-                "analysis_summary": {
-                    "total_transactions": len(transactions),
-                    "analysis_timestamp": datetime.datetime.now().isoformat(),
+                {
+                    "role": "system",
+                    "content": "You are a financial compliance auditor. Analyze transactions for policy violations."
                 },
-                "transactions": {}
-            }
-
-            # Analyze each transaction with progress bar
-            for transaction_id, transaction_data in tqdm(transactions.items(), desc="Analyzing Transactions", unit="transaction"):
-                try:
-                    compliance_result = check_transaction_against_policy(
-                        transaction_data["details"], 
-                        policy_text
-                    )
-                    
-                    response["transactions"][transaction_id] = {
-                        "transaction_details": transaction_data["details"],
-                        "compliance_analysis": compliance_result
-                    }
-                except litellm.exceptions.APIError as e:
-                    response["transactions"][transaction_id] = {
-                        "transaction_details": transaction_data["details"],
-                        "compliance_analysis": f"Error: {str(e)}"
-                    }
-
-            return response
-
-        except Exception as e:
-            return {
-                "error": str(e),
-                "status": "failed",
-                "timestamp": datetime.datetime.now().isoformat()
-            }
+                {
+                    "role": "user",
+                    "content": f"Policy: {policy_text}\n\nTransaction: {transaction_str}\n\n"
+                            "Answer with ONLY: 'Violation: [Yes/No] - [reason]'"
+                }
+            ]
+            response = chat_ollama.invoke(messages)
+            transaction['violation'] = response.content
+            
+        return transactions

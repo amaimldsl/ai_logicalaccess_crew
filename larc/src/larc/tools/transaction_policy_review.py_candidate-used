@@ -5,8 +5,9 @@ import PyPDF2
 from pathlib import Path
 from typing import Dict, Any
 from pydantic import BaseModel, Field
-import datetime,os
+import datetime, os
 from openai import OpenAI
+from tqdm import tqdm  # Import the tqdm library for progress bars
 
 import datetime
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
@@ -23,7 +24,7 @@ class TransactionPolicyReview:
         """
         # Path setup
         base_dir = Path(__file__).resolve().parent
-        parent_folder = base_dir
+        parent_folder = base_dir.parent
         data_dir = parent_folder / 'data'
         docs_dir = data_dir
 
@@ -96,7 +97,7 @@ class TransactionPolicyReview:
             return result.choices[0].message.content
 
         try:
-            # Load data
+            # Load data with progress bar
             transactions = load_transactions(csv_path)
             policy_text = extract_policy_text(pdf_path)
 
@@ -109,8 +110,8 @@ class TransactionPolicyReview:
                 "transactions": {}
             }
 
-            # Analyze each transaction
-            for transaction_id, transaction_data in transactions.items():
+            # Analyze each transaction with progress bar
+            for transaction_id, transaction_data in tqdm(transactions.items(), desc="Analyzing Transactions", unit="transaction"):
                 try:
                     compliance_result = check_transaction_against_policy(
                         transaction_data["details"], 

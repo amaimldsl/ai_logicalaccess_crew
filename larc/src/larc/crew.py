@@ -20,7 +20,7 @@ class Larc():
         Initialize the Larc crew with the DeepSeek configuration.
         """
         os.environ['LITELLM_LOG'] = 'DEBUG'  # Replace deprecated set_verbose
-        litellm.set_verbose=True
+        #litellm.set_verbose=True
         #if not deepseek_api_key or not deepseek_api_base or not deepseek_model:
         #    raise ValueError("One or more DeepSeek parameters are missing.")
         #print(f"API Key: {deepseek_api_key}, Base URL: {deepseek_api_base}, Model: {deepseek_model}")
@@ -141,17 +141,6 @@ class Larc():
 
 
     @task
-    def review_transaction_policy(self) -> Task:
-        return Task(
-            config=self.tasks_config['review_transaction_policy'],
-            tools=[self.trans_policy_review.transaction_policy_review_tool],
-            llm = self.agent_llm,
-            #async_execution=True,
-            output_file="findings/TransactionsComplianceObservation.md",
-            
-        )
-
-    @task
     def review_logical_access(self) -> Task:
         return Task(
             config=self.tasks_config['review_logical_access'],
@@ -185,7 +174,16 @@ class Larc():
         )
     
     
-
+    @task
+    def review_transaction_policy(self) -> Task:
+        return Task(
+            config=self.tasks_config['review_transaction_policy'],
+            tools=[self.trans_policy_review.transaction_policy_review_tool],
+            llm = self.agent_llm,
+            #async_execution=True,
+            output_file="findings/TransactionsComplianceObservation.md",
+            
+        )
     
 
     @task
