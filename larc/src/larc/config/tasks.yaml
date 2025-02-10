@@ -280,7 +280,6 @@ review_transaction_policy:
       - Specific time frame specification
 
 
-
 compile_audit_report:
     description: Compile all findings from findings folder into comprehensive audit report
     agent: audit_report_writer
@@ -320,11 +319,12 @@ compile_audit_report:
               sections_to_include:
                 - Observation
                 - Observation Details
-                - Risk Assessment
-                - Risk Rating
+                - Observation Risks
+                - Risk Rating (Critical / High / Medium / Low)
                 - Management Action
               formatting:
                 - Preserve original section hierarchy
+                - Include the found discrepancies 
                 - Maintain bullet point structure
                 - Keep original risk ratings
                 - Include source file reference
@@ -334,6 +334,7 @@ compile_audit_report:
             - Include all .md files from findings folder
             - Parse headers using markdown structure
             - Preserve original formatting within sections
+            - Include the found discrepancies 
         
         executive_summary:
             - Aggregate all Critical and High risks first
