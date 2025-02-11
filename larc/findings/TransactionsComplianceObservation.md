@@ -1,94 +1,55 @@
-# Transaction Policy Compliance Findings
+# Policy Compliance Findings
 
-## Findings
+## Summary of Findings
 
-### Transaction 0
-- **Transaction Amount**: 175,000
-- **Transaction Date**: 2024-01-15
-- **Approved Users**: USER008
-- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER008
+The following transactions were analyzed for compliance with organizational policies:
 
-### Transaction 1
-- **Transaction Amount**: 150,000
-- **Transaction Date**: 2024-01-16
-- **Approved Users**: USER004
-- **Analysis Result**: Transaction is approved within the single approval limit of USER004
+### Transactions with Policy Violations
+1. **Transaction ID: T001**  
+   - Date: 2024-09-07  
+   - Amount: AED 14,236.29  
+   - Vendor: Vendor D  
+   - Type: Purchase  
+   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval.  
 
-### Transaction 2
-- **Transaction Amount**: 2,500,000
-- **Transaction Date**: 2024-01-17
-- **Approved Users**: USER001, USER002
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER002']
+2. **Transaction ID: T002**  
+   - Date: 2024-10-17  
+   - Amount: AED 3,091.70  
+   - Vendor: Vendor H  
+   - Type: Purchase  
+   - **Issue**: Vendor not pre-approved by procurement department. Discount of 22.53% exceeds allowed 15% without justification.  
 
-### Transaction 3
-- **Transaction Amount**: 120,000
-- **Transaction Date**: 2024-01-18
-- **Approved Users**: USER009
-- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER009
+3. **Transaction ID: T003**  
+   - Date: 2024-08-21  
+   - Amount: AED 8,655.29  
+   - Vendor: Vendor D  
+   - Type: Invoice  
+   - **Issue**: Vendor not pre-approved by procurement department.  
 
-### Transaction 4
-- **Transaction Amount**: 3,500,000
-- **Transaction Date**: 2024-01-19
-- **Approved Users**: USER003, USER004
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER003', 'USER004']
+4. **Transaction ID: T004**  
+   - Date: 2024-10-16  
+   - Amount: AED 13,029.37  
+   - Vendor: Vendor I  
+   - Type: Purchase  
+   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval. No department authorization for purchase above AED 5,000.  
 
-### Transaction 5
-- **Transaction Amount**: 450,000
-- **Transaction Date**: 2024-01-20
-- **Approved Users**: USER007
-- **Analysis Result**: Transaction is approved within the single approval limit of USER007
+5. **Transaction ID: T005**  
+   - Date: 2024-09-15  
+   - Amount: AED 15,451.42  
+   - Vendor: Vendor I  
+   - Type: Purchase  
+   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval.  
 
-### Transaction 6
-- **Transaction Amount**: 1,500,000
-- **Transaction Date**: 2024-01-21
-- **Approved Users**: USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER002', 'USER003']
+### Transactions with No Violations
+No transactions were found to be fully compliant with all organizational policies.
 
-### Transaction 7
-- **Transaction Amount**: 800,000
-- **Transaction Date**: 2024-01-22
-- **Approved Users**: USER010
-- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER010
+## Recommendations
+1. **Policy Enforcement**: Strengthen enforcement of maximum purchase limits and vendor pre-approval processes.  
+2. **Training**: Provide training to employees on policy requirements, especially regarding discounts and vendor selection.  
+3. **Approval Workflow**: Implement a robust approval workflow for transactions exceeding AED 5,000.  
+4. **Regular Audits**: Conduct regular audits to ensure ongoing compliance with organizational policies.  
 
-### Transaction 8
-- **Transaction Amount**: 4,000,000
-- **Transaction Date**: 2024-01-23
-- **Approved Users**: USER001, USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER002', 'USER003']
+---
 
-### Transaction 9
-- **Transaction Amount**: 600,000
-- **Transaction Date**: 2024-01-24
-- **Approved Users**: USER005
-- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER005
-
-### Transaction 10
-- **Transaction Amount**: 2,800,000
-- **Transaction Date**: 2024-01-25
-- **Approved Users**: USER001, USER004
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER004']
-
-### Transaction 11
-- **Transaction Amount**: 95,000
-- **Transaction Date**: 2024-01-26
-- **Approved Users**: USER008
-- **Analysis Result**: Transaction is approved within the single approval limit of USER008
-
-### Transaction 12
-- **Transaction Amount**: 3,200,000
-- **Transaction Date**: 2024-01-27
-- **Approved Users**: USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER002', 'USER003']
-
-### Transaction 13
-- **Transaction Amount**: 175,000
-- **Transaction Date**: 2024-01-28
-- **Approved Users**: USER006
-- **Analysis Result**: Transaction is approved within the single approval limit of USER006
-
-### Transaction 14
-- **Transaction Amount**: 5,500,000
-- **Transaction Date**: 2024-01-29
-- **Approved Users**: USER001, USER002, USER003
-- **Analysis Result**: Transaction Amount Exceeds the joint Approval Level of users ['USER001', 'USER002', 'USER003']
+This concludes the policy compliance findings. Immediate action is recommended to address the identified issues.
 ```
