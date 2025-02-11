@@ -1,55 +1,49 @@
-# Policy Compliance Findings
+# Transaction Policy Compliance Findings
 
-## Summary of Findings
+## Summary of Discrepancies
 
-The following transactions were analyzed for compliance with organizational policies:
+The following discrepancies were identified during the transaction policy compliance review:
 
-### Transactions with Policy Violations
-1. **Transaction ID: T001**  
-   - Date: 2024-09-07  
-   - Amount: AED 14,236.29  
-   - Vendor: Vendor D  
-   - Type: Purchase  
-   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval.  
+### Transaction T001
+- **Date**: 09-07-24
+- **Amount**: AED 14,236.29
+- **Vendor**: Vendor D
+- **Type**: Purchase
+- **Violation**: Yes - The transaction violates the policy because it exceeds the maximum purchase limit without prior approval. The amount of the transaction (AED 14,236.29) is above AED 10,000 and does not have 'Prior_Finance_Approval' in the data. Additionally, the vendor 'Vendor D' is not in the list of approved vendors by the procurement department.
 
-2. **Transaction ID: T002**  
-   - Date: 2024-10-17  
-   - Amount: AED 3,091.70  
-   - Vendor: Vendor H  
-   - Type: Purchase  
-   - **Issue**: Vendor not pre-approved by procurement department. Discount of 22.53% exceeds allowed 15% without justification.  
+### Transaction T002
+- **Date**: 17-10-24
+- **Amount**: AED 3,091.70
+- **Vendor**: Vendor H
+- **Type**: Purchase
+- **Violation**: Yes - The transaction exceeds the maximum purchase limit without prior approval as the amount is AED 3,091.70 which is more than AED 10,000 and has been approved by the department head but not by the finance department (Prior_Finance_Approval: Yes / No).
 
-3. **Transaction ID: T003**  
-   - Date: 2024-08-21  
-   - Amount: AED 8,655.29  
-   - Vendor: Vendor D  
-   - Type: Invoice  
-   - **Issue**: Vendor not pre-approved by procurement department.  
+### Transaction T003
+- **Date**: 21-08-24
+- **Amount**: AED 8,655.29
+- **Vendor**: Vendor D
+- **Type**: Invoice
+- **Violation**: Yes - The transaction was made with a vendor (Vendor D) not approved by the procurement department.
 
-4. **Transaction ID: T004**  
-   - Date: 2024-10-16  
-   - Amount: AED 13,029.37  
-   - Vendor: Vendor I  
-   - Type: Purchase  
-   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval. No department authorization for purchase above AED 5,000.  
+### Transaction T004
+- **Date**: 16-10-24
+- **Amount**: AED 13,029.37
+- **Vendor**: Vendor I
+- **Type**: Purchase
+- **Violation**: Yes - This transaction violates the Maximum Purchase Limit policy as the purchase amount (AED 13,029.37) exceeds the single transaction limit of AED 10,000 without prior approval from the finance department. Additionally, this transaction does not have Prior_Finance_Approval set to 'Yes'.
 
-5. **Transaction ID: T005**  
-   - Date: 2024-09-15  
-   - Amount: AED 15,451.42  
-   - Vendor: Vendor I  
-   - Type: Purchase  
-   - **Issue**: Exceeds maximum purchase limit (AED 10,000) without prior finance approval.  
-
-### Transactions with No Violations
-No transactions were found to be fully compliant with all organizational policies.
+### Transaction T005
+- **Date**: 15-09-24
+- **Amount**: AED 15,451.42
+- **Vendor**: Vendor I
+- **Type**: Purchase
+- **Violation**: Yes - The transaction exceeds the maximum purchase limit of AED 10,000 without prior approval from the finance department.
 
 ## Recommendations
-1. **Policy Enforcement**: Strengthen enforcement of maximum purchase limits and vendor pre-approval processes.  
-2. **Training**: Provide training to employees on policy requirements, especially regarding discounts and vendor selection.  
-3. **Approval Workflow**: Implement a robust approval workflow for transactions exceeding AED 5,000.  
-4. **Regular Audits**: Conduct regular audits to ensure ongoing compliance with organizational policies.  
+1. **Immediate Remediation**: Investigate and address the discrepancies identified in the transactions where policy violations were found.
+2. **Training**: Provide additional training to users on the importance of adhering to transaction policies and obtaining necessary approvals.
+3. **Periodic Reviews**: Implement periodic reviews of transaction records to ensure ongoing compliance with transaction policies.
 
----
-
-This concludes the policy compliance findings. Immediate action is recommended to address the identified issues.
+## Conclusion
+The transaction policy compliance review has identified several discrepancies where transactions were made without proper approvals or with unapproved vendors. Immediate action is required to remediate these issues and ensure compliance with the transaction policies.
 ```

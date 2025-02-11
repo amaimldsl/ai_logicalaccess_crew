@@ -1,6 +1,8 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import FileReadTool, DirectoryReadTool
 from tools.access_review import AccessReview
+import litellm
 from tools.transaction_approval_review import TransactionApprovalReview
 from tools.change_management_verification import ChangeManagementVerification
 from tools.transaction_policy_review import TransactionPolicyReview
@@ -8,12 +10,6 @@ import os
 import time
 from pathlib import Path
 from typing import List, Dict
-from litellm.exceptions import RateLimitError
-
-
-from crewai import Agent, Crew, Process, Task, LLM
-import time
-from typing import Optional
 from litellm.exceptions import RateLimitError, APIError
 import json
 import logging
@@ -116,10 +112,6 @@ class Larc():
     def __init__(self, deepseek_api_key, deepseek_api_base, deepseek_model):
         
         
-        #os.environ['LITELLM_LOG'] = 'DEBUG'
-        #os.environ['DEEPSEEK_API_KEY'] = deepseek_api_key
-        #os.environ['DEEPSEEK_BASE_URL'] = deepseek_api_base
-
         # Configure logging
         logging.basicConfig(
             level=logging.DEBUG,
@@ -130,14 +122,7 @@ class Larc():
             ]
         )
 
-        self.agent_llm = EnhancedLLM(
-            model=deepseek_model,
-            api_key=deepseek_api_key,
-            base_url=deepseek_api_base,
-            max_retries=999,  # You can adjust these values
-            base_delay=2,
-            max_delay=61
-        )
+      
         
         #########
         
@@ -153,7 +138,17 @@ class Larc():
         DEEPSEEK_LCL_14B_LLM =  LLM(model="ollama/deepseek-r1:14b")
         DEEPSEEK_LCL_32B_LLM =  LLM(model="ollama/deepseek-r1:32b")
 
-                
+
+        DEEPSEEK_LLM=   EnhancedLLM(
+            model=deepseek_model,
+            api_key=deepseek_api_key,
+            base_url=deepseek_api_base,
+            max_retries=999,  # You can adjust these values
+            base_delay=2,
+            max_delay=61
+        )
+
+        self.agent_llm = MISTRAL_LLM
 
         def create_groc_ds_llm():
             """Initialize the Groq DeepSeek LLM with rate limit handling."""
@@ -176,6 +171,12 @@ class Larc():
 
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
+
+
+    # Define tools
+    file_tool = FileReadTool()
+    directory_tool = DirectoryReadTool(directory='./findings')
+
 
     access_review = AccessReview()
     limit_review = TransactionApprovalReview()
@@ -268,19 +269,8 @@ class Larc():
         return Task(
         config=self.tasks_config['compile_audit_report'],
         llm=self.agent_llm,
-        tools=[
-            self.access_review.access_review_tool,
-            self.limit_review.limit_review_tool,
-            self.trail_review.change_management_verification_tool,
-            self.trans_policy_review.transaction_policy_review_tool
-        ],
         output_file="DraftAuditReport.md",
-        context=[
-            self.review_logical_access(),
-            self.review_transaction_limits(),
-            self.review_audit_trail(),
-            self.review_transaction_policy()
-        ],
+        tools=[self.directory_tool,self.file_tool],
         description="Compile findings from markdown files in chronological risk order (Critical->Low), including Executive Summary and Detailed Findings with root cause analysis."
     )
     

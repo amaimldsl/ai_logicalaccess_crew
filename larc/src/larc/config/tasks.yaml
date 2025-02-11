@@ -121,24 +121,6 @@ review_transaction_limits:
             - Compensating controls
             - Time frame specification
 
-
-review_transactions:
-    description: Analyze transactions for policy violations
-    agent: transaction_reviewer
-    priority: 1
-    expected_output: A markdown file containing transaction-related findings with title, background, discrepancies, and user feedback section
-
-
-
-
-
-
-
-
-
-
-
-
 review_audit_trail:
   description: Verify change management compliance and identify potential process violations
   agent: audit_trail_reviewer

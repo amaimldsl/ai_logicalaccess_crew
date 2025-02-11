@@ -61,21 +61,16 @@ The following discrepancies were identified during the access review:
 - **system_c_access**: User has access level of `maker` but is unauthorized.
 
 ## Users with No Discrepancies
-
-The following users have access levels that match the authorized access matrix:
-
 - USER004
 - USER007
 - USER013
 - USER018
 
 ## Recommendations
+1. **Immediate Remediation**: Revoke unauthorized access for users USER021, USER022, USER023, and USER024.
+2. **Access Level Adjustments**: Adjust access levels for users with discrepancies to match the authorized access matrix.
+3. **Periodic Reviews**: Implement periodic access reviews to ensure ongoing compliance with the access matrix.
 
-1. **Revoke Unauthorized Access**: Users USER021, USER022, USER023, and USER024 should have their access revoked immediately as they are unauthorized to access any systems.
-2. **Adjust Access Levels**: For users with discrepancies, adjust their access levels to match the authorized access matrix.
-3. **Regular Audits**: Implement regular access reviews to ensure compliance and prevent unauthorized access.
-
----
-
-This concludes the access review findings. Immediate action is recommended to address the identified discrepancies.
+## Conclusion
+The access review has identified several discrepancies and unauthorized access instances. Immediate action is required to remediate these issues and ensure compliance with the authorized access matrix.
 ```
