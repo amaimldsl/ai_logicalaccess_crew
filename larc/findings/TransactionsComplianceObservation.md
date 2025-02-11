@@ -1,52 +1,94 @@
 # Transaction Policy Compliance Findings
 
-## Summary of Findings
-The following transactions were analyzed against the company's transaction policy. The findings are categorized based on compliance status.
+## Findings
 
-### Non-Compliant Transactions
-1. **Transaction ID: T001**
-   - **Date**: 09-07-24
-   - **Amount**: AED 14,236.29
-   - **Vendor**: Vendor D
-   - **Type**: Purchase
-   - **Violation**: Purchase from unapproved vendor (Vendor D is not in the list of procurement-approved vendors).
+### Transaction 0
+- **Transaction Amount**: 175,000
+- **Transaction Date**: 2024-01-15
+- **Approved Users**: USER008
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER008
 
-2. **Transaction ID: T004**
-   - **Date**: 16-10-24
-   - **Amount**: AED 13,029.37
-   - **Vendor**: Vendor I
-   - **Type**: Purchase
-   - **Violation**: Exceeds maximum purchase limit without prior approval from the finance department.
+### Transaction 1
+- **Transaction Amount**: 150,000
+- **Transaction Date**: 2024-01-16
+- **Approved Users**: USER004
+- **Analysis Result**: Transaction is approved within the single approval limit of USER004
 
-3. **Transaction ID: T005**
-   - **Date**: 15-09-24
-   - **Amount**: AED 15,451.42
-   - **Vendor**: Vendor I
-   - **Type**: Purchase
-   - **Violations**:
-     - Amount exceeds AED 10,000 without prior finance approval.
-     - Vendor I is not in the approved vendor list.
+### Transaction 2
+- **Transaction Amount**: 2,500,000
+- **Transaction Date**: 2024-01-17
+- **Approved Users**: USER001, USER002
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER002']
 
-### Compliant Transactions
-1. **Transaction ID: T002**
-   - **Date**: 17-10-24
-   - **Amount**: AED 3,091.70
-   - **Vendor**: Vendor H
-   - **Type**: Purchase
-   - **Compliance Status**: Compliant
-   - **Explanation**: The transaction is within the purchase limit of AED 10,000 and has prior finance approval. Vendor H is not explicitly listed as unapproved.
+### Transaction 3
+- **Transaction Amount**: 120,000
+- **Transaction Date**: 2024-01-18
+- **Approved Users**: USER009
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER009
 
-2. **Transaction ID: T003**
-   - **Date**: 21-08-24
-   - **Amount**: AED 8,655.29
-   - **Vendor**: Vendor D
-   - **Type**: Invoice
-   - **Compliance Status**: Compliant
-   - **Explanation**: No violations found. Vendor D is not pre-approved, but this does not necessarily indicate a policy violation without further context.
+### Transaction 4
+- **Transaction Amount**: 3,500,000
+- **Transaction Date**: 2024-01-19
+- **Approved Users**: USER003, USER004
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER003', 'USER004']
 
-## Recommendations
-1. **Vendor Approval Process**: Strengthen the vendor approval process to ensure all purchases are made from pre-approved vendors.
-2. **Finance Approval Enforcement**: Ensure all transactions exceeding AED 10,000 receive prior finance approval.
-3. **Policy Training**: Provide training to employees on transaction policies, particularly regarding vendor selection and purchase limits.
-4. **Audit and Monitoring**: Implement regular audits of transactions to identify and address compliance issues proactively.
+### Transaction 5
+- **Transaction Amount**: 450,000
+- **Transaction Date**: 2024-01-20
+- **Approved Users**: USER007
+- **Analysis Result**: Transaction is approved within the single approval limit of USER007
+
+### Transaction 6
+- **Transaction Amount**: 1,500,000
+- **Transaction Date**: 2024-01-21
+- **Approved Users**: USER002, USER003
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER002', 'USER003']
+
+### Transaction 7
+- **Transaction Amount**: 800,000
+- **Transaction Date**: 2024-01-22
+- **Approved Users**: USER010
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER010
+
+### Transaction 8
+- **Transaction Amount**: 4,000,000
+- **Transaction Date**: 2024-01-23
+- **Approved Users**: USER001, USER002, USER003
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER002', 'USER003']
+
+### Transaction 9
+- **Transaction Amount**: 600,000
+- **Transaction Date**: 2024-01-24
+- **Approved Users**: USER005
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER005
+
+### Transaction 10
+- **Transaction Amount**: 2,800,000
+- **Transaction Date**: 2024-01-25
+- **Approved Users**: USER001, USER004
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER001', 'USER004']
+
+### Transaction 11
+- **Transaction Amount**: 95,000
+- **Transaction Date**: 2024-01-26
+- **Approved Users**: USER008
+- **Analysis Result**: Transaction is approved within the single approval limit of USER008
+
+### Transaction 12
+- **Transaction Amount**: 3,200,000
+- **Transaction Date**: 2024-01-27
+- **Approved Users**: USER002, USER003
+- **Analysis Result**: Transaction is approved within the joint approval limit of users ['USER002', 'USER003']
+
+### Transaction 13
+- **Transaction Amount**: 175,000
+- **Transaction Date**: 2024-01-28
+- **Approved Users**: USER006
+- **Analysis Result**: Transaction is approved within the single approval limit of USER006
+
+### Transaction 14
+- **Transaction Amount**: 5,500,000
+- **Transaction Date**: 2024-01-29
+- **Approved Users**: USER001, USER002, USER003
+- **Analysis Result**: Transaction Amount Exceeds the joint Approval Level of users ['USER001', 'USER002', 'USER003']
 ```

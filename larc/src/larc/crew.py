@@ -18,60 +18,130 @@ from litellm.exceptions import RateLimitError, APIError
 import json
 import logging
 
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),  # Print to console
+        logging.FileHandler('api_calls.log')  # Also save to file
+    ]
+)
+
+
 class DeepseekAPIWrapper:
-    def __init__(self, max_retries=3, base_delay=1, max_delay=32):
+    def __init__(self, max_retries=999, base_delay=1, max_delay=32):
         self.max_retries = max_retries
         self.base_delay = base_delay
         self.max_delay = max_delay
+        self.logger = logging.getLogger(__name__)
         
     def handle_call(self, func, *args, **kwargs):
         retry_count = 0
         while retry_count < self.max_retries:
             try:
+                self.logger.debug(f"Attempt {retry_count + 1} of API call")
                 return func(*args, **kwargs)
-            except (APIError, RateLimitError) as e:
+            except (APIError, litellm.exceptions.APIError) as e:  # Add litellm.exceptions.APIError
                 retry_count += 1
+                
+                # Log the full error for debugging
+                self.logger.error(f"Full error details: {str(e)}")
+                
                 if retry_count == self.max_retries:
+                    self.logger.error(f"Max retries ({self.max_retries}) reached. Giving up.")
                     raise
                 
                 delay = min(self.base_delay * (2 ** retry_count), self.max_delay)
-                logging.warning(f"API call failed (attempt {retry_count}): {str(e)}")
-                logging.info(f"Retrying in {delay} seconds...")
+                self.logger.warning(f"API error (attempt {retry_count}): {str(e)}")
+                self.logger.info(f"Retrying in {delay} seconds...")
                 time.sleep(delay)
-            except json.JSONDecodeError as e:
-                retry_count += 1
-                if retry_count == self.max_retries:
-                    raise APIError(f"Failed to decode JSON response after {self.max_retries} attempts")
                 
-                delay = min(self.base_delay * (2 ** retry_count), self.max_delay)
-                logging.warning(f"JSON decode error (attempt {retry_count}): {str(e)}")
-                logging.info(f"Retrying in {delay} seconds...")
-                time.sleep(delay)
+            except Exception as e:
+                self.logger.error(f"Unexpected error type {type(e)}: {str(e)}")
+                raise
+
+
+
+
+
 
 class EnhancedLLM(LLM):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, max_retries=999, base_delay=1, max_delay=32, **kwargs):
         super().__init__(*args, **kwargs)
-        self.api_wrapper = DeepseekAPIWrapper()
-        
-    def generate(self, *args, **kwargs):
-        return self.api_wrapper.handle_call(super().generate, *args, **kwargs)
-    
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+        self.logger = logging.getLogger(__name__)
+
     def chat(self, *args, **kwargs):
-        return self.api_wrapper.handle_call(super().chat, *args, **kwargs)
+        retry_count = 0
+        while retry_count < self.max_retries:
+            try:
+                return super().chat(*args, **kwargs)
+            except APIError as e:
+                retry_count += 1
+                #self.logger.error(f"API error on attempt {retry_count}: {str(e)}")
+                
+                if retry_count >= self.max_retries:
+                    self.logger.error("Max retries reached, raising error")
+                    raise
+                
+                delay = min(self.base_delay * (2 ** retry_count), self.max_delay)
+                self.logger.info(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+
+    def call(self, *args, **kwargs):
+        retry_count = 0
+        while retry_count < self.max_retries:
+            try:
+                return super().call(*args, **kwargs)
+            except APIError as e:
+                retry_count += 1
+                self.logger.error(f"API error on attempt {retry_count}: {str(e)}")
+                
+                if retry_count >= self.max_retries:
+                    self.logger.error("Max retries reached, raising error")
+                    raise
+                
+                delay = min(self.base_delay * (2 ** retry_count), self.max_delay)
+                self.logger.info(f"Retrying in {delay} seconds...")
+                time.sleep(delay)
+
+
 
 @CrewBase
 class Larc():
     def __init__(self, deepseek_api_key, deepseek_api_base, deepseek_model):
-        os.environ['LITELLM_LOG'] = 'DEBUG'
-        os.environ['DEEPSEEK_API_KEY'] = deepseek_api_key
-        os.environ['DEEPSEEK_BASE_URL'] = deepseek_api_base
+        
+        
+        #os.environ['LITELLM_LOG'] = 'DEBUG'
+        #os.environ['DEEPSEEK_API_KEY'] = deepseek_api_key
+        #os.environ['DEEPSEEK_BASE_URL'] = deepseek_api_base
+
+        # Configure logging
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.StreamHandler(),
+                logging.FileHandler('larc.log')
+            ]
+        )
 
         self.agent_llm = EnhancedLLM(
             model=deepseek_model,
             api_key=deepseek_api_key,
-            base_url=deepseek_api_base
+            base_url=deepseek_api_base,
+            max_retries=999,  # You can adjust these values
+            base_delay=2,
+            max_delay=61
         )
-
+        
+        #########
+        
+        
 
         LLAMA31_LLM = LLM(model="ollama/llama3.1")
         MISTRAL_LLM = LLM(model="ollama/mistral")

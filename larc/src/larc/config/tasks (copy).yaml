@@ -211,40 +211,73 @@ review_audit_trail:
 
 
 review_transaction_policy:
-  description: Verify transaction-level compliance with organizational policies
+  description: Verify transactions are inline with the policy and provide comprehensive analysis of compliance status.
   agent: transaction_reviewer
   priority: 1
-  expected_output: A markdown file containing policy compliance findings
+  expected_output: A markdown file containing transaction policy compliance findings
   output_structure:
     sections:
-      - title: Policy Observation
+      - title: Observation
         requirements:
-          - Focus on specific policy clauses
-          - Reference policy document versions
-      - title: Policy Violation Details
+          - Subject-focused and concise
+          - Non-negative phrasing
+          - Clear without technical jargon
+
+      - title: Observation Details
+        format: bullet_points
+        requirements:
+          - Direct and concise points explaining transactions non compliance discrepancies
+          - Logical flow in main and sub-bullets
+          - No background information
+          - Clear timeline and scope
+          - Evidence-based findings
+
+      - title: Risk Assessment
+        components:
+          - Identified risks in transactions non compliance process
+          - Impact analysis of non-compliant transactions non compliance
+          - Control gaps in transactions non compliance transactions execution
+          - System and operational implications
+
+      - title: Risk Rating
+        options:
+          - Critical
+          - High
+          - Medium
+          - Low
+        criteria:
+          - transactions non compliance violation severity
+          - transactions non compliance likelihood
+          - Control effectiveness
+          - Potential system impact
+
+      - title: Management Action
         format: bullet_points
         components:
-          - Violated policy section
-          - Transaction IDs involved
-          - Nature of non-compliance
-      - title: Compliance Risk Assessment
-        components:
-          - Regulatory implications
-          - Reputational risks
-          - Financial exposure
-      - title: Risk Rating
-        options: [Critical, High, Medium, Low]
-        criteria:
-          - Severity of policy breach
-          - Regulatory penalty likelihood
-      - title: Remediation Actions
-        components:
-          - Policy updates required
-          - Staff retraining needs
-          - Monitoring improvements
+          - Required corrective actions
+          - User responsibility assignments
+          - Success criteria for process improvement
 
+  writing_guidelines:
+    style:
+      - Use passive voice
+      - Avoid personal pronouns
+      - No subjective language
+      - Plain English
+      - Define abbreviations first
 
+    formatting:
+      - Consistent bullet point structure
+      - Proper comma usage
+      - Single transition words
+      - Parallel structure in lists
 
+    content:
+      - Focus on change management process risks
+      - Clear root cause identification
+      - Impact assessment of non-compliant changes
+      - Recommended compensating controls
+      - Specific time frame specification
 
 
 compile_audit_report:
@@ -260,46 +293,88 @@ compile_audit_report:
               required: true
               components:
                 - title: Critical Issues
-                  content: Aggregated list of all Critical risk findings
+                  content: Aggregated list of all findings with Critical risk rating
                   format: bullet_points
+                
                 - title: High Risk Issues
-                  content: Aggregated list of all High risk findings
+                  content: Aggregated list of all findings with High risk rating
                   format: bullet_points
-                - title: Risk Distribution
-                  content: Statistical breakdown of risk ratings
+                
+                - title: Key Findings Overview
+                  content: Summary of all major observations
+                  format: bullet_points
+                
+                - title: Risk Profile
+                  content: Distribution of risk ratings across findings
                   format: table
                   columns:
                     - Risk Rating
                     - Count
                     - Percentage
-
+            
             - title: Detailed Observations
               required: true
               structure: per_finding
-              components:
-                - section: Observation
-                  elements:
-                    - Observation Title:
-                        content: Title of the finding
-                        risk_rating: 
-                          position: right-aligned
-                          format: "(Risk Rating: Critical/High/Medium/Low)"
-                    - Observation Details:
-                        content: 
-                          - Background of audited process
-                          - Noted discrepancies
-                          - Root cause analysis
-                        format: bullet_points
-                    - Risks:
-                        content:
-                          - Identified risks
-                          - Impact analysis
-                          - System implications
-                        format: bullet_points
-                    - Management Actions:
-                        content: Recommended mitigation steps
-                        format: bullet_points
+              source: findings_folder
+              sections_to_include:
+                - Observation
+                - Observation Details
+                - Observation Risks
+                - Risk Rating (Critical / High / Medium / Low)
+                - Management Action
               formatting:
-                - Each finding as separate H2 section
-                - Risk rating aligned to right of observation title
-                - Clear separation between observation/risk/action sections
+                - Preserve original section hierarchy
+                - Include the found discrepancies 
+                - Maintain bullet point structure
+                - Keep original risk ratings
+                - Include source file reference
+    
+    compilation_rules:
+        finding_selection:
+            - Include all .md files from findings folder
+            - Parse headers using markdown structure
+            - Preserve original formatting within sections
+            - Include the found discrepancies 
+        
+        executive_summary:
+            - Aggregate all Critical and High risks first
+            - Summarize key points from each finding
+            - Calculate risk distribution statistics
+            - Present trends and patterns
+        
+        detailed_findings:
+            - Group by finding source
+            - Maintain original section order
+            - Preserve all formatting and lists
+            - Include full observation details
+    
+    quality_control:
+        checks:
+            - All required sections present
+            - Consistent risk rating usage
+            - Complete management actions
+            - Proper section hierarchy
+            - Evidence documentation
+        
+        formatting:
+            - Consistent header levels
+            - Proper bullet point structure
+            - Clear section breaks
+            - Professional layout
+            - Proper citation of source findings
+    
+    writing_standards:
+        style:
+            - Professional tone
+            - Objective language
+            - Clear and concise
+            - Risk-focused approach
+        
+        content:
+            - Evidence-based findings
+            - Clear impact analysis
+            - Practical recommendations
+            - Measurable outcomes
+            - Source traceability
+
+

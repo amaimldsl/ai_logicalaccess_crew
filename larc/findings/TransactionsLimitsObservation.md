@@ -1,12 +1,12 @@
 # Transaction Limit Compliance Analysis
 
-## Transaction Analysis Results
+## Findings
 
 ### Transaction 0
 - **Transaction Amount**: 175,000
 - **Transaction Date**: 2024-01-15
 - **Approved Users**: USER008
-- **Analysis Result**: Transaction Amount Exceed user Approval Level for USER008
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER008
 
 ### Transaction 1
 - **Transaction Amount**: 150,000
@@ -24,7 +24,7 @@
 - **Transaction Amount**: 120,000
 - **Transaction Date**: 2024-01-18
 - **Approved Users**: USER009
-- **Analysis Result**: Transaction Amount Exceed user Approval Level for USER009
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER009
 
 ### Transaction 4
 - **Transaction Amount**: 3,500,000
@@ -48,7 +48,7 @@
 - **Transaction Amount**: 800,000
 - **Transaction Date**: 2024-01-22
 - **Approved Users**: USER010
-- **Analysis Result**: Transaction Amount Exceed user Approval Level for USER010
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER010
 
 ### Transaction 8
 - **Transaction Amount**: 4,000,000
@@ -60,7 +60,7 @@
 - **Transaction Amount**: 600,000
 - **Transaction Date**: 2024-01-24
 - **Approved Users**: USER005
-- **Analysis Result**: Transaction Amount Exceed user Approval Level for USER005
+- **Analysis Result**: Transaction Amount Exceeds user Approval Level for USER005
 
 ### Transaction 10
 - **Transaction Amount**: 2,800,000
@@ -90,5 +90,5 @@
 - **Transaction Amount**: 5,500,000
 - **Transaction Date**: 2024-01-29
 - **Approved Users**: USER001, USER002, USER003
-- **Analysis Result**: Transaction Amount Exceed the joint Approval Level of users ['USER001', 'USER002', 'USER003']
+- **Analysis Result**: Transaction Amount Exceeds the joint Approval Level of users ['USER001', 'USER002', 'USER003']
 ```
