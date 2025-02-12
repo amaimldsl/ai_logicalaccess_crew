@@ -271,7 +271,7 @@ class Larc():
                 self.review_audit_trail(),
                 self.review_transaction_policy()
             ],
-            description="Compile findings into report with: 1) Executive Summary containing audit background and aggregated statistics 2) Detailed findings structured with Observation, Risk Rating, Risks, and Management Actions subsections for each finding.",
+            description="Compile findings into report with: 1) Executive Summary containing audit background and aggregated statistics 2) Detailed findings structured with Observation, Risk Rating, Risks, and Management Actions subsections for each finding. Preserve original findings verbatim while adding structured analysis.Include every transaction ID and user mention from source files.",
         async_execution=False,
         callback=lambda output: logging.debug(f"Compiled files: {output}")
         )

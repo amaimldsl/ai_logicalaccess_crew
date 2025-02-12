@@ -30,7 +30,7 @@ class TransactionPolicyReview:
                 return ''.join(page.extract_text() for page in reader.pages)
         
         # LLM configuration
-        LLM_MODEL = "mistral"
+        LLM_MODEL = "deepseek-r1:14b"
         chat_ollama = ChatOllama(model=LLM_MODEL)
         
         # Process transactions

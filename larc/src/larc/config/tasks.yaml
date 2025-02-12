@@ -282,3 +282,6 @@ compile_audit_report:
                 - Each finding as separate H2 section
                 - Consistent subsection ordering (Observation > Risk Rating > Risks > Management Actions)
                 - Clear separation between audit domains
+                - Preserve all original findings verbatim
+                - Maintain source file order within risk categories
+                - Include full transaction IDs/user IDs from sources
