@@ -1,76 +1,123 @@
 # Access Review Findings
 
-## Summary of Discrepancies
+## Summary
+This document outlines the findings from the access review conducted to compare system access levels against the authorized access matrix. The review identified discrepancies and unauthorized access patterns for several users across different systems.
 
-The following discrepancies were identified during the access review:
+---
+
+## Detailed Findings
 
 ### USER001
-- **system_b_access**: User has actual access level of `maker` but should have `checker`.
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the access matrix (read-only).
 
 ### USER002
-- **system_b_access**: User has actual access level of `maker` but should have `read-only`.
+- **system_a_access**: Access level matches the access matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
+- **system_c_access**: Access level matches the access matrix (maker).
 
 ### USER003
-- **system_a_access**: User has actual access level of `maker` but should have `read-only`.
+- **system_a_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
+- **system_b_access**: Access level matches the access matrix (maker).
+- **system_c_access**: Access level matches the access matrix (checker).
+
+### USER004
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Access level matches the access matrix (maker).
+- **system_c_access**: Access level matches the access matrix (maker).
 
 ### USER005
-- **system_b_access**: User has actual access level of `maker` but should have `checker`.
+- **system_a_access**: Access level matches the access matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the access matrix (checker).
 
 ### USER006
-- **system_c_access**: User has actual access level of `maker` but should have `read-only`.
+- **system_a_access**: Access level matches the access matrix (read-only).
+- **system_b_access**: Access level matches the access matrix (read-only).
+- **system_c_access**: Discrepancy found. Actual access level is `maker`, but should be `read-only`.
+
+### USER007
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Access level matches the access matrix (checker).
+- **system_c_access**: Access level matches the access matrix (maker).
 
 ### USER008
-- **system_c_access**: User has actual access level of `read-only` but should have `checker`.
+- **system_a_access**: Access level matches the access matrix (checker).
+- **system_b_access**: Access level matches the access matrix (maker).
+- **system_c_access**: Discrepancy found. Actual access level is `read-only`, but should be `checker`.
 
 ### USER009
-- **system_a_access**: User has actual access level of `checker` but should have `read-only`.
+- **system_a_access**: Discrepancy found. Actual access level is `checker`, but should be `read-only`.
+- **system_b_access**: Access level matches the access matrix (checker).
+- **system_c_access**: Access level matches the access matrix (read-only).
 
 ### USER010
-- **system_c_access**: User has actual access level of `maker` but should have `checker`.
-
-### USER012
-- **system_b_access**: User has actual access level of `maker` but should have `checker`.
-
-### USER014
-- **system_b_access**: User has actual access level of `checker` but should have `read-only`.
-
-### USER016
-- **system_b_access**: User has actual access level of `maker` but should have `checker`.
-
-### USER017
-- **system_a_access**: User has actual access level of `maker` but should have `checker`.
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Access level matches the access matrix (read-only).
+- **system_c_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
 
 ### USER021
-- **system_a_access**: User has access level of `maker` but is unauthorized.
-- **system_b_access**: User has access level of `read-only` but is unauthorized.
-- **system_c_access**: User has access level of `checker` but is unauthorized.
+- **system_a_access**: Unauthorized access. User has `maker` access but should have no access.
+- **system_b_access**: Unauthorized access. User has `read-only` access but should have no access.
+- **system_c_access**: Unauthorized access. User has `checker` access but should have no access.
+
+### USER012
+- **system_a_access**: Access level matches the access matrix (read-only).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the access matrix (maker).
+
+### USER013
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Access level matches the access matrix (maker).
+- **system_c_access**: Access level matches the access matrix (checker).
+
+### USER014
+- **system_a_access**: Access level matches the access matrix (checker).
+- **system_b_access**: Discrepancy found. Actual access level is `checker`, but should be `read-only`.
+- **system_c_access**: Access level matches the access matrix (read-only).
 
 ### USER022
-- **system_a_access**: User has access level of `read-only` but is unauthorized.
-- **system_b_access**: User has access level of `maker` but is unauthorized.
-- **system_c_access**: User has access level of `maker` but is unauthorized.
+- **system_a_access**: Unauthorized access. User has `read-only` access but should have no access.
+- **system_b_access**: Unauthorized access. User has `maker` access but should have no access.
+- **system_c_access**: Unauthorized access. User has `maker` access but should have no access.
+
+### USER016
+- **system_a_access**: Access level matches the access matrix (maker).
+- **system_b_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_c_access**: Access level matches the access matrix (checker).
+
+### USER017
+- **system_a_access**: Discrepancy found. Actual access level is `maker`, but should be `checker`.
+- **system_b_access**: Access level matches the access matrix (maker).
+- **system_c_access**: Access level matches the access matrix (read-only).
+
+### USER018
+- **system_a_access**: Access level matches the access matrix (read-only).
+- **system_b_access**: Access level matches the access matrix (read-only).
+- **system_c_access**: Access level matches the access matrix (maker).
 
 ### USER023
-- **system_a_access**: User has access level of `maker` but is unauthorized.
-- **system_b_access**: User has access level of `checker` but is unauthorized.
-- **system_c_access**: User has access level of `read-only` but is unauthorized.
+- **system_a_access**: Unauthorized access. User has `maker` access but should have no access.
+- **system_b_access**: Unauthorized access. User has `checker` access but should have no access.
+- **system_c_access**: Unauthorized access. User has `read-only` access but should have no access.
 
 ### USER024
-- **system_a_access**: User has access level of `checker` but is unauthorized.
-- **system_b_access**: User has access level of `maker` but is unauthorized.
-- **system_c_access**: User has access level of `maker` but is unauthorized.
+- **system_a_access**: Unauthorized access. User has `checker` access but should have no access.
+- **system_b_access**: Unauthorized access. User has `maker` access but should have no access.
+- **system_c_access**: Unauthorized access. User has `maker` access but should have no access.
 
-## Users with No Discrepancies
-- USER004
-- USER007
-- USER013
-- USER018
+---
 
 ## Recommendations
-1. **Immediate Remediation**: Revoke unauthorized access for users USER021, USER022, USER023, and USER024.
-2. **Access Level Adjustments**: Adjust access levels for users with discrepancies to match the authorized access matrix.
-3. **Periodic Reviews**: Implement periodic access reviews to ensure ongoing compliance with the access matrix.
+1. **Immediate Remediation**: Revoke unauthorized access for users flagged with discrepancies or unauthorized access.
+2. **Access Matrix Update**: Ensure the access matrix is updated to reflect any changes in roles or responsibilities.
+3. **Regular Audits**: Conduct periodic access reviews to maintain compliance and prevent unauthorized access.
+4. **User Training**: Educate users on access policies and the importance of adhering to the access matrix.
 
-## Conclusion
-The access review has identified several discrepancies and unauthorized access instances. Immediate action is required to remediate these issues and ensure compliance with the authorized access matrix.
+--- 
+
+**Prepared by**: Access Review Specialist  
+**Date**: [Insert Date]  
+**Version**: 1.0
 ```

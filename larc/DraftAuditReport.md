@@ -1,57 +1,66 @@
 # Comprehensive Audit Report
 
-## Executive Summary
-The audit review identified several critical discrepancies in transaction policy compliance, particularly concerning maximum purchase limits and vendor approvals. Immediate remediation is required to address these violations and ensure future compliance.
-
-## Detailed Findings (Critical to Low Risk)
+## 1. Logical Access Findings
 
 ### Critical Findings
-1. **Transaction T001**
-   - **Date**: 09-07-24
-   - **Amount**: AED 14,236.29
-   - **Vendor**: Vendor D
-   - **Type**: Purchase
-   - **Violation**: Exceeds maximum purchase limit without prior approval and involves an unapproved vendor.
-   - **Root Cause**: Lack of prior finance approval and procurement department oversight.
-
-2. **Transaction T005**
-   - **Date**: 15-09-24
-   - **Amount**: AED 15,451.42
-   - **Vendor**: Vendor I
-   - **Type**: Purchase
-   - **Violation**: Exceeds maximum purchase limit without prior approval.
-   - **Root Cause**: Insufficient finance department oversight.
-
-3. **Transaction T004**
-   - **Date**: 16-10-24
-   - **Amount**: AED 13,029.37
-   - **Vendor**: Vendor I
-   - **Type**: Purchase
-   - **Violation**: Exceeds maximum purchase limit without prior approval.
-   - **Root Cause**: Lack of prior finance approval.
+- **Unauthorized Access**: 4 users (USER021, USER022, USER023, USER024) have access to systems they are not authorized to use. This poses a significant security risk as unauthorized access can lead to data breaches or misuse of sensitive systems.
+  - **Root Cause**: Lack of proper access control enforcement and periodic access reviews.
+  - **Recommendation**: Immediate revocation of unauthorized access and implementation of stricter access control policies.
 
 ### High Findings
-4. **Transaction T002**
-   - **Date**: 17-10-24
-   - **Amount**: AED 3,091.70
-   - **Vendor**: Vendor H
-   - **Type**: Purchase
-   - **Violation**: Exceeds maximum purchase limit without proper finance department approval.
-   - **Root Cause**: Department head approval without finance department oversight.
+- **Access Discrepancies**: 12 users (USER001, USER002, USER003, USER005, USER006, USER008, USER009, USER010, USER012, USER014, USER016, USER017) have access levels that do not match the authorized access matrix.
+  - **Root Cause**: Inconsistent application of access levels during user provisioning or role changes.
+  - **Recommendation**: Align user access levels with the authorized access matrix and conduct regular access reviews.
 
-5. **Transaction T003**
-   - **Date**: 21-08-24
-   - **Amount**: AED 8,655.29
-   - **Vendor**: Vendor D
-   - **Type**: Invoice
-   - **Violation**: Involves an unapproved vendor.
-   - **Root Cause**: Procurement department oversight failure.
+---
 
-## Recommendations
-1. **Immediate Remediation**: Investigate and address the discrepancies identified in the transactions where policy violations were found.
-2. **Training**: Provide additional training to users on the importance of adhering to transaction policies and obtaining necessary approvals.
-3. **Periodic Reviews**: Implement periodic reviews of transaction records to ensure ongoing compliance with transaction policies.
+## 2. Transaction Limit Compliance Findings
 
-## Conclusion
-The transaction policy compliance review has identified several critical and high-risk discrepancies where transactions were made without proper approvals or with unapproved vendors. Immediate action is required to remediate these issues and ensure compliance with the transaction policies.
+### High Findings
+- **Limit Violations**: 4 transactions (Transaction 0, Transaction 3, Transaction 7, Transaction 9, Transaction 14) exceed the authorized approval limits.
+  - **Root Cause**: Lack of proper validation during transaction approval processes.
+  - **Recommendation**: Implement stricter validation checks and ensure all transactions comply with established approval hierarchies.
+
+### Low Findings
+- **Compliant Transactions**: 11 transactions are within the authorized approval limits.
+  - **Root Cause**: Proper adherence to transaction approval policies.
+  - **Recommendation**: Continue monitoring and enforcing compliance with transaction approval limits.
+
+---
+
+## 3. Audit Trail Compliance Findings
+
+### Critical Findings
+- **Non-Compliant Transactions**: 14 transactions were found to have deviations from change management policies, including missing change tickets and unauthorized user actions.
+  - **Root Cause**: Lack of enforcement of change management policies and inadequate oversight.
+  - **Recommendation**: Investigate and remediate all non-compliant transactions immediately. Ensure all future changes are accompanied by valid change tickets and are carried out by authorized users.
+
+### Low Findings
+- **Compliant Transactions**: 6 transactions were verified and found to be compliant with change management policies.
+  - **Root Cause**: Proper adherence to change management policies.
+  - **Recommendation**: Continue enforcing change management policies and conduct regular audits to maintain compliance.
+
+---
+
+## 4. Policy Compliance Findings
+
+### Critical Findings
+- **Unauthorized Changes**: 3 transactions (DataProcessor, SecurityModule, ConfigSettings) were modified by unauthorized users (USER009, USER002, USER005).
+  - **Root Cause**: Lack of proper user authorization checks during change processes.
+  - **Recommendation**: Implement stricter user authorization checks and ensure only authorized users can make changes.
+
+### High Findings
+- **Missing Change Tickets**: 11 transactions were modified without valid change tickets.
+  - **Root Cause**: Lack of enforcement of change ticket requirements.
+  - **Recommendation**: Ensure all future changes are accompanied by valid change tickets and conduct regular audits to enforce compliance.
+
+---
+
+## Summary of Recommendations
+1. **Logical Access**: Revoke unauthorized access and align user access levels with the authorized access matrix.
+2. **Transaction Limits**: Implement stricter validation checks for transaction approvals.
+3. **Audit Trail**: Investigate and remediate non-compliant transactions and enforce change management policies.
+4. **Policy Compliance**: Implement stricter user authorization checks and ensure all changes are accompanied by valid change tickets.
+
+**Overall Recommendation**: Conduct regular audits and implement automated controls to ensure ongoing compliance with all policies and procedures.
 ```

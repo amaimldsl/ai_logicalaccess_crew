@@ -18,7 +18,7 @@ review_logical_access:
                 - No background information
                 - Clear timeline and scope
                 - Evidence-based findings
-            - title: Risk Assessment
+            - title: Risks
               components:
                 - Identified risks
                 - Impact analysis
@@ -79,7 +79,7 @@ review_transaction_limits:
                 - No background information
                 - Clear timeline and scope
                 - Evidence-based findings
-            - title: Risk Assessment
+            - title: Risks
               components:
                 - Identified risks
                 - Impact analysis
@@ -143,7 +143,7 @@ review_audit_trail:
           - Clear timeline and scope
           - Evidence-based findings
 
-      - title: Risk Assessment
+      - title: Risks
         components:
           - Identified risks in change management process
           - Impact analysis of non-compliant changes
@@ -226,9 +226,6 @@ review_transaction_policy:
           - Monitoring improvements
 
 
-
-
-
 compile_audit_report:
     description: Compile all findings from findings folder into comprehensive audit report
     agent: audit_report_writer
@@ -241,47 +238,47 @@ compile_audit_report:
             - title: Executive Summary
               required: true
               components:
-                - title: Critical Issues
-                  content: Aggregated list of all Critical risk findings
-                  format: bullet_points
-                - title: High Risk Issues
-                  content: Aggregated list of all High risk findings
-                  format: bullet_points
-                - title: Risk Distribution
-                  content: Statistical breakdown of risk ratings
+                - title: Audit Background
+                  content: Overview of audit scope and objectives
+                  format: paragraph
+                - title: Key Findings Summary
+                  content: Aggregated statistics of findings across all audit areas
                   format: table
                   columns:
-                    - Risk Rating
-                    - Count
-                    - Percentage
+                    - Audit Area
+                    - Critical
+                    - High
+                    - Medium
+                    - Low
+                - title: Overall Risk Assessment
+                  content: Summary of most critical risks across all audit domains
+                  format: bullet_points
 
-            - title: Detailed Observations
+            - title: Detailed Findings
               required: true
               structure: per_finding
               components:
-                - section: Observation
+                - section: "[Audit Area] - [Finding Title]"
                   elements:
-                    - Observation Title:
-                        content: Title of the finding
-                        risk_rating: 
-                          position: right-aligned
-                          format: "(Risk Rating: Critical/High/Medium/Low)"
-                    - Observation Details:
+                    - Observation:
                         content: 
-                          - Background of audited process
-                          - Noted discrepancies
+                          - Process background
+                          - Identified issues
                           - Root cause analysis
                         format: bullet_points
+                    - Risk Rating:
+                        content: "[Critical/High/Medium/Low]"
+                        format: bold_label
                     - Risks:
                         content:
-                          - Identified risks
-                          - Impact analysis
-                          - System implications
+                          - Potential business impacts
+                          - Control failures
+                          - Compliance implications
                         format: bullet_points
                     - Management Actions:
                         content: Recommended mitigation steps
-                        format: bullet_points
+                        format: numbered_list
               formatting:
                 - Each finding as separate H2 section
-                - Risk rating aligned to right of observation title
-                - Clear separation between observation/risk/action sections
+                - Consistent subsection ordering (Observation > Risk Rating > Risks > Management Actions)
+                - Clear separation between audit domains

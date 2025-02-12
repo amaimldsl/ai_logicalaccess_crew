@@ -122,12 +122,6 @@ class Larc():
             ]
         )
 
-      
-        
-        #########
-        
-        
-
         LLAMA31_LLM = LLM(model="ollama/llama3.1")
         MISTRAL_LLM = LLM(model="ollama/mistral")
         LLAMA32_LLM = LLM(model="ollama/llama3.2")
@@ -148,7 +142,7 @@ class Larc():
             max_delay=61
         )
 
-        self.agent_llm = MISTRAL_LLM
+        self.agent_llm = DEEPSEEK_LLM
 
         def create_groc_ds_llm():
             """Initialize the Groq DeepSeek LLM with rate limit handling."""
@@ -267,13 +261,21 @@ class Larc():
     @task
     def compile_audit_report(self) -> Task:
         return Task(
-        config=self.tasks_config['compile_audit_report'],
-        llm=self.agent_llm,
-        output_file="DraftAuditReport.md",
-        tools=[self.directory_tool,self.file_tool],
-        description="Compile findings from markdown files in chronological risk order (Critical->Low), including Executive Summary and Detailed Findings with root cause analysis."
-    )
-    
+            config=self.tasks_config['compile_audit_report'],
+            llm=self.agent_llm,
+            output_file="DraftAuditReport.md",
+            tools=[self.directory_tool, self.file_tool],
+            context=[
+                self.review_logical_access(),
+                self.review_transaction_limits(),
+                self.review_audit_trail(),
+                self.review_transaction_policy()
+            ],
+            description="Compile findings into report with: 1) Executive Summary containing audit background and aggregated statistics 2) Detailed findings structured with Observation, Risk Rating, Risks, and Management Actions subsections for each finding.",
+        async_execution=False,
+        callback=lambda output: logging.debug(f"Compiled files: {output}")
+        )
+        
     
     
     @crew
