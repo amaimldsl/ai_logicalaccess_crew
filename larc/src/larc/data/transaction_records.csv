@@ -1,6 +1,6 @@
 Transaction ID,Date,Amount,Vendor,Purchase Order ID,Type,Discount,Discount_Justification,Tax Paid,Submitted Date,Department_Authorization,Item Description,Prior_Finance_Approval
-T001,09-07-24,14236.29,Vendor D,PO1970,Purchase,16.84%,Special promotion applied,No,17-07-24,Yes,Software Subscription,Yes
-T002,17-10-24,3091.7,Vendor H,PO1672,Purchase,22.53%,,Yes,17-10-24,Yes,Office Computers,Yes
-T003,21-08-24,8655.29,Vendor D,PO1335,Invoice,22.07%,Special promotion applied,Yes,26-09-24,Yes,Printer Supplies,Yes
-T004,16-10-24,13029.37,Vendor I,PO1635,Purchase,22.61%,,Yes,01-11-24,No,Consulting Services,No
-T005,15-09-24,15451.42,Vendor I,PO1210,Purchase,14.16%,,Yes,11-10-24,No,Laptops,No
+T001,09-07-24,14236.29,Microsoft,PO1970,Purchase,16.84%,Special promotion applied,No,17-07-24,Yes,Software Subscription,Yes
+T002,17-10-24,3091.7,HP,PO1672,Purchase,22.53%,,Yes,17-10-24,Yes,Office Computers,Yes
+T003,21-08-24,8655.29,Oracle,PO1335,Invoice,22.07%,Special promotion applied,Yes,26-09-24,Yes,Printer Supplies,Yes
+T004,16-10-24,13029.37,HP,PO1635,Purchase,22.61%,,Yes,01-11-24,No,Consulting Services,No
+T005,15-09-24,15451.42,Apple,PO1210,Purchase,14.16%,,Yes,11-10-24,No,Laptops,No
