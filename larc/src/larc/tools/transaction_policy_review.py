@@ -42,7 +42,7 @@ class TransactionPolicyReview:
             messages = [
                 {
                     "role": "system",
-                    "content": "You are a financial compliance auditor. Analyze transactions for policy violations."
+                    "content": "You are a financial compliance auditor. Analyze transactions for policy violations. Make sure to cover all rules in the policy. If there are multiple policy violations, make sure to add them all including the reference in the policy condition that is violated. "
                 },
                 {
                     "role": "user",

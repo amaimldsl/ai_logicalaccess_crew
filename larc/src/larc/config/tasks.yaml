@@ -256,7 +256,7 @@ compile_audit_report:
 
             - title: Detailed Findings
               required: true
-              structure: per_finding
+              structure: per_source_file
               components:
                 - section: "[Audit Area] - [Finding Title]"
                   elements:

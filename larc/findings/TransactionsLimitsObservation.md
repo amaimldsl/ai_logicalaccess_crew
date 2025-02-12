@@ -1,121 +1,117 @@
-# Transaction Limit Compliance Analysis
+```markdown
+# Transaction Limit Compliance Analysis Report
 
-## Summary of Findings
-The analysis of transaction approvals against authorized limits revealed several discrepancies. Below is a detailed breakdown of the findings for each transaction:
+## Findings Summary
 
----
-
-### Transaction 0
-- **Transaction Amount**: 175,000
-- **Approved Users**: USER008
-- **Analysis Result**: Transaction Amount Exceeded USER008's Approval Level
+This report outlines the analysis of transaction approvals against authorized limits. The analysis identified transactions that were either compliant or non-compliant with the approval limits of the users involved.
 
 ---
 
-### Transaction 1
-- **Transaction Amount**: 150,000
-- **Approved Users**: USER004
-- **Analysis Result**: Transaction is approved within the single approval limit of USER004
+## Detailed Findings
+
+### **Compliant Transactions**
+1. **Transaction 1**  
+   - **Amount**: $150,000  
+   - **Date**: 2024-01-16  
+   - **Approved by**: USER004  
+   - **Result**: Transaction is approved within the single approval limit of USER004.
+
+2. **Transaction 2**  
+   - **Amount**: $2,500,000  
+   - **Date**: 2024-01-17  
+   - **Approved by**: USER001, USER002  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER001, USER002].
+
+3. **Transaction 4**  
+   - **Amount**: $3,500,000  
+   - **Date**: 2024-01-19  
+   - **Approved by**: USER003, USER004  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER003, USER004].
+
+4. **Transaction 5**  
+   - **Amount**: $450,000  
+   - **Date**: 2024-01-20  
+   - **Approved by**: USER007  
+   - **Result**: Transaction is approved within the single approval limit of USER007.
+
+5. **Transaction 6**  
+   - **Amount**: $1,500,000  
+   - **Date**: 2024-01-21  
+   - **Approved by**: USER002, USER003  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER002, USER003].
+
+6. **Transaction 8**  
+   - **Amount**: $4,000,000  
+   - **Date**: 2024-01-23  
+   - **Approved by**: USER001, USER002, USER003  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER001, USER002, USER003].
+
+7. **Transaction 10**  
+   - **Amount**: $2,800,000  
+   - **Date**: 2024-01-25  
+   - **Approved by**: USER001, USER004  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER001, USER004].
+
+8. **Transaction 11**  
+   - **Amount**: $95,000  
+   - **Date**: 2024-01-26  
+   - **Approved by**: USER008  
+   - **Result**: Transaction is approved within the single approval limit of USER008.
+
+9. **Transaction 12**  
+   - **Amount**: $3,200,000  
+   - **Date**: 2024-01-27  
+   - **Approved by**: USER002, USER003  
+   - **Result**: Transaction is approved within the joint approval limit of users [USER002, USER003].
+
+10. **Transaction 13**  
+    - **Amount**: $175,000  
+    - **Date**: 2024-01-28  
+    - **Approved by**: USER006  
+    - **Result**: Transaction is approved within the single approval limit of USER006.
 
 ---
 
-### Transaction 2
-- **Transaction Amount**: 2,500,000
-- **Approved Users**: USER001, USER002
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER001 and USER002
+### **Non-Compliant Transactions**
+1. **Transaction 0**  
+   - **Amount**: $175,000  
+   - **Date**: 2024-01-15  
+   - **Approved by**: USER008  
+   - **Result**: Transaction Amount Exceeds user Approval Level for USER008.
 
----
+2. **Transaction 3**  
+   - **Amount**: $120,000  
+   - **Date**: 2024-01-18  
+   - **Approved by**: USER009  
+   - **Result**: Transaction Amount Exceeds user Approval Level for USER009.
 
-### Transaction 3
-- **Transaction Amount**: 120,000
-- **Approved Users**: USER009
-- **Analysis Result**: Transaction Amount Exceeded USER009's Approval Level
+3. **Transaction 7**  
+   - **Amount**: $800,000  
+   - **Date**: 2024-01-22  
+   - **Approved by**: USER010  
+   - **Result**: Transaction Amount Exceeds user Approval Level for USER010.
 
----
+4. **Transaction 9**  
+   - **Amount**: $600,000  
+   - **Date**: 2024-01-24  
+   - **Approved by**: USER005  
+   - **Result**: Transaction Amount Exceeds user Approval Level for USER005.
 
-### Transaction 4
-- **Transaction Amount**: 3,500,000
-- **Approved Users**: USER003, USER004
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER003 and USER004
-
----
-
-### Transaction 5
-- **Transaction Amount**: 450,000
-- **Approved Users**: USER007
-- **Analysis Result**: Transaction is approved within the single approval limit of USER007
-
----
-
-### Transaction 6
-- **Transaction Amount**: 1,500,000
-- **Approved Users**: USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER002 and USER003
-
----
-
-### Transaction 7
-- **Transaction Amount**: 800,000
-- **Approved Users**: USER010
-- **Analysis Result**: Transaction Amount Exceeded USER010's Approval Level
-
----
-
-### Transaction 8
-- **Transaction Amount**: 4,000,000
-- **Approved Users**: USER001, USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER001, USER002, and USER003
-
----
-
-### Transaction 9
-- **Transaction Amount**: 600,000
-- **Approved Users**: USER005
-- **Analysis Result**: Transaction Amount Exceeded USER005's Approval Level
-
----
-
-### Transaction 10
-- **Transaction Amount**: 2,800,000
-- **Approved Users**: USER001, USER004
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER001 and USER004
-
----
-
-### Transaction 11
-- **Transaction Amount**: 95,000
-- **Approved Users**: USER008
-- **Analysis Result**: Transaction is approved within the single approval limit of USER008
-
----
-
-### Transaction 12
-- **Transaction Amount**: 3,200,000
-- **Approved Users**: USER002, USER003
-- **Analysis Result**: Transaction is approved within the joint approval limit of users USER002 and USER003
-
----
-
-### Transaction 13
-- **Transaction Amount**: 175,000
-- **Approved Users**: USER006
-- **Analysis Result**: Transaction is approved within the single approval limit of USER006
-
----
-
-### Transaction 14
-- **Transaction Amount**: 5,500,000
-- **Approved Users**: USER001, USER002, USER003
-- **Analysis Result**: Transaction Amount Exceeded the joint Approval Level of users USER001, USER002, and USER003
+5. **Transaction 14**  
+   - **Amount**: $5,500,000  
+   - **Date**: 2024-01-29  
+   - **Approved by**: USER001, USER002, USER003  
+   - **Result**: Transaction Amount Exceeds the joint Approval Level of users [USER001, USER002, USER003].
 
 ---
 
 ## Recommendations
-1. **Immediate Remediation**: Revoke or adjust approval limits for users who exceeded their authorized levels (USER008, USER009, USER010, USER005).
-2. **Access Alignment**: Ensure all transactions are approved within the authorized limits of the approving users.
-3. **Periodic Reviews**: Conduct regular reviews of transaction approvals to ensure compliance with authorized limits.
+1. **Review and Adjust Approval Limits**: For users with non-compliant transactions (USER005, USER008, USER009, USER010), review their approval limits and adjust them as necessary to prevent future violations.
+2. **Training and Awareness**: Provide training to users on their approval limits and the importance of adhering to them.
+3. **Enhanced Monitoring**: Implement additional monitoring mechanisms to flag transactions that exceed approval limits before they are processed.
 
 ---
 
-This concludes the transaction limit compliance analysis.
+**Prepared by**: Transaction Limit Compliance Analyst  
+**Date**: 2024-01-30  
 ```

@@ -1,176 +1,146 @@
-# Change Management Audit Findings
+# Change Management Compliance Audit Report
 
-## Summary of Findings
-The analysis of audit trail records against change tickets revealed several discrepancies and potential violations of change management policies. Below is a detailed breakdown of the findings:
+## Findings Summary
 
----
-
-### Audit Trail Record 1
-- **Date/Time**: 2024-01-14 09:30:00
-- **Component Modified**: UserAccessModule
-- **Modified By User**: USER001
-- **Verification Result**: Audit trail record date is found with the authorized user: USER001; however, it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
+This report outlines the analysis of audit trail records against change tickets based on the change management SLA. The analysis identified records that were either compliant or non-compliant with the change management policies.
 
 ---
 
-### Audit Trail Record 2
-- **Date/Time**: 2024-01-15 04:20:00
-- **Component Modified**: SecuritySettings
-- **Modified By User**: USER004
-- **Verification Result**: Audit trail record date is found with the authorized user: USER004; however, it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
+## Detailed Findings
+
+### **Compliant Audit Trail Records**
+1. **Record 1**  
+   - **Date & Time**: 2024-01-19 11:45:00  
+   - **Component Modified**: DatabaseConfig  
+   - **Modified by User**: USER002  
+   - **Result**: Audit trail record relies on change ticket: CHG003 and was carried out by the authorized user: USER002.
+
+2. **Record 2**  
+   - **Date & Time**: 2024-01-16 18:30:00  
+   - **Component Modified**: NetworkSettings  
+   - **Modified by User**: USER007  
+   - **Result**: Audit trail record relies on change ticket: CHG004 and was carried out by the authorized user: USER007.
+
+3. **Record 3**  
+   - **Date & Time**: 2024-01-17 11:15:00  
+   - **Component Modified**: APIEndpoints  
+   - **Modified by User**: USER003  
+   - **Result**: Audit trail record relies on change ticket: CHG005 and was carried out by the authorized user: USER003.
+
+4. **Record 4**  
+   - **Date & Time**: 2024-01-17 17:40:00  
+   - **Component Modified**: LoggingSystem  
+   - **Modified by User**: USER005  
+   - **Result**: Audit trail record relies on change ticket: CHG006 and was carried out by the authorized user: USER005.
+
+5. **Record 5**  
+   - **Date & Time**: 2024-01-18 23:25:00  
+   - **Component Modified**: BackupSystem  
+   - **Modified by User**: USER006  
+   - **Result**: Audit trail record relies on change ticket: CHG008 and was carried out by the authorized user: USER006.
+
+6. **Record 6**  
+   - **Date & Time**: 2024-01-21 19:50:00  
+   - **Component Modified**: UserManagement  
+   - **Modified by User**: USER003  
+   - **Result**: Audit trail record relies on change ticket: CHG014 and was carried out by the authorized user: USER003.
 
 ---
 
-### Audit Trail Record 3
-- **Date/Time**: 2024-01-19 11:45:00
-- **Component Modified**: DatabaseConfig
-- **Modified By User**: USER002
-- **Verification Result**: Audit trail record relies on change ticket: CHG003 and was carried out by the authorized user: USER002.
+### **Non-Compliant Audit Trail Records**
+1. **Record 1**  
+   - **Date & Time**: 2024-01-14 09:30:00  
+   - **Component Modified**: UserAccessModule  
+   - **Modified by User**: USER001  
+   - **Result**: Audit trail record date is found with the authorized user: USER001; however - it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
 
----
+2. **Record 2**  
+   - **Date & Time**: 2024-01-15 04:20:00  
+   - **Component Modified**: SecuritySettings  
+   - **Modified by User**: USER004  
+   - **Result**: Audit trail record date is found with the authorized user: USER004; however - it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
 
-### Audit Trail Record 4
-- **Date/Time**: 2024-01-16 18:30:00
-- **Component Modified**: NetworkSettings
-- **Modified By User**: USER007
-- **Verification Result**: Audit trail record relies on change ticket: CHG004 and was carried out by the authorized user: USER007.
+3. **Record 3**  
+   - **Date & Time**: 2024-10-18 09:00:00  
+   - **Component Modified**: UserInterface  
+   - **Modified by User**: USER008  
+   - **Result**: Audit trail record date is found with the authorized user: USER008; however - it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
 
----
+4. **Record 4**  
+   - **Date & Time**: 2024-02-19 11:30:00  
+   - **Component Modified**: AuthModule  
+   - **Modified by User**: USER001  
+   - **Result**: Audit trail record date is found with the authorized user: USER001; however - it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
 
-### Audit Trail Record 5
-- **Date/Time**: 2024-01-17 11:15:00
-- **Component Modified**: APIEndpoints
-- **Modified By User**: USER003
-- **Verification Result**: Audit trail record relies on change ticket: CHG005 and was carried out by the authorized user: USER003.
+5. **Record 5**  
+   - **Date & Time**: 2024-01-19 06:15:00  
+   - **Component Modified**: ReportingEngine  
+   - **Modified by User**: USER004  
+   - **Result**: Audit trail record date is found with the authorized user: USER004; however - it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
 
----
+6. **Record 6**  
+   - **Date & Time**: 2024-01-20 11:45:00  
+   - **Component Modified**: DataProcessor  
+   - **Modified by User**: USER009  
+   - **Result**: Audit trail record date is found linked to change ticket: CHG011, however the change was carried out by the unauthorized user: USER009 - while it should have been carried out by: USER002.
 
-### Audit Trail Record 6
-- **Date/Time**: 2024-01-17 17:40:00
-- **Component Modified**: LoggingSystem
-- **Modified By User**: USER005
-- **Verification Result**: Audit trail record relies on change ticket: CHG006 and was carried out by the authorized user: USER005.
+7. **Record 7**  
+   - **Date & Time**: 2024-01-20 19:20:00  
+   - **Component Modified**: SecurityModule  
+   - **Modified by User**: USER002  
+   - **Result**: Audit trail record date is found linked to change ticket: CHG012, however the change was carried out by the unauthorized user: USER002 - while it should have been carried out by: USER005.
 
----
+8. **Record 8**  
+   - **Date & Time**: 2024-01-21 10:15:00  
+   - **Component Modified**: ConfigSettings  
+   - **Modified by User**: USER005  
+   - **Result**: Audit trail record date is found linked to change ticket: CHG013, however the change was carried out by the unauthorized user: USER005 - while it should have been carried out by: USER007.
 
-### Audit Trail Record 7
-- **Date/Time**: 2024-10-18 09:00:00
-- **Component Modified**: UserInterface
-- **Modified By User**: USER008
-- **Verification Result**: Audit trail record date is found with the authorized user: USER008; however, it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
+9. **Record 9**  
+   - **Date & Time**: 2024-01-29 10:30:00  
+   - **Component Modified**: APIGateway  
+   - **Modified by User**: USER007  
+   - **Result**: Could not find any change ticket that is related to this audit trail record.
 
----
+10. **Record 10**  
+    - **Date & Time**: 2024-01-22 15:45:00  
+    - **Component Modified**: DatabaseIndex  
+    - **Modified by User**: USER001  
+    - **Result**: Could not find any change ticket that is related to this audit trail record.
 
-### Audit Trail Record 8
-- **Date/Time**: 2024-01-18 23:25:00
-- **Component Modified**: BackupSystem
-- **Modified By User**: USER006
-- **Verification Result**: Audit trail record relies on change ticket: CHG008 and was carried out by the authorized user: USER006.
+11. **Record 11**  
+    - **Date & Time**: 2024-01-23 09:45:00  
+    - **Component Modified**: AccessControl  
+    - **Modified by User**: USER006  
+    - **Result**: Could not find any change ticket that is related to this audit trail record.
 
----
+12. **Record 12**  
+    - **Date & Time**: 2024-01-23 14:30:00  
+    - **Component Modified**: SystemCore  
+    - **Modified by User**: USER004  
+    - **Result**: Could not find any change ticket that is related to this audit trail record.
 
-### Audit Trail Record 9
-- **Date/Time**: 2024-02-19 11:30:00
-- **Component Modified**: AuthModule
-- **Modified By User**: USER001
-- **Verification Result**: Audit trail record date is found with the authorized user: USER001; however, it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
+13. **Record 13**  
+    - **Date & Time**: 2024-01-24 11:00:00  
+    - **Component Modified**: LogAnalyzer  
+    - **Modified by User**: USER008  
+    - **Result**: Could not find any change ticket that is related to this audit trail record.
 
----
-
-### Audit Trail Record 10
-- **Date/Time**: 2024-01-19 06:15:00
-- **Component Modified**: ReportingEngine
-- **Modified By User**: USER004
-- **Verification Result**: Audit trail record date is found with the authorized user: USER004; however, it might be a change management violation as there were no change tickets found that satisfy the change management SLA.
-
----
-
-### Audit Trail Record 11
-- **Date/Time**: 2024-01-20 11:45:00
-- **Component Modified**: DataProcessor
-- **Modified By User**: USER009
-- **Verification Result**: Audit trail record date is found linked to change ticket: CHG011, however the change was carried out by the unauthorized user: USER009 - while it should have been carried out by: USER002.
-
----
-
-### Audit Trail Record 12
-- **Date/Time**: 2024-01-20 19:20:00
-- **Component Modified**: SecurityModule
-- **Modified By User**: USER002
-- **Verification Result**: Audit trail record date is found linked to change ticket: CHG012, however the change was carried out by the unauthorized user: USER002 - while it should have been carried out by: USER005.
-
----
-
-### Audit Trail Record 13
-- **Date/Time**: 2024-01-21 10:15:00
-- **Component Modified**: ConfigSettings
-- **Modified By User**: USER005
-- **Verification Result**: Audit trail record date is found linked to change ticket: CHG013, however the change was carried out by the unauthorized user: USER005 - while it should have been carried out by: USER007.
-
----
-
-### Audit Trail Record 14
-- **Date/Time**: 2024-01-21 19:50:00
-- **Component Modified**: UserManagement
-- **Modified By User**: USER003
-- **Verification Result**: Audit trail record relies on change ticket: CHG014 and was carried out by the authorized user: USER003.
-
----
-
-### Audit Trail Record 15
-- **Date/Time**: 2024-01-29 10:30:00
-- **Component Modified**: APIGateway
-- **Modified By User**: USER007
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
-
----
-
-### Audit Trail Record 16
-- **Date/Time**: 2024-01-22 15:45:00
-- **Component Modified**: DatabaseIndex
-- **Modified By User**: USER001
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
-
----
-
-### Audit Trail Record 17
-- **Date/Time**: 2024-01-23 09:45:00
-- **Component Modified**: AccessControl
-- **Modified By User**: USER006
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
-
----
-
-### Audit Trail Record 18
-- **Date/Time**: 2024-01-23 14:30:00
-- **Component Modified**: SystemCore
-- **Modified By User**: USER004
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
-
----
-
-### Audit Trail Record 19
-- **Date/Time**: 2024-01-24 11:00:00
-- **Component Modified**: LogAnalyzer
-- **Modified By User**: USER008
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
-
----
-
-### Audit Trail Record 20
-- **Date/Time**: 2024-01-24 16:00:00
-- **Component Modified**: WebService
-- **Modified By User**: USER002
-- **Verification Result**: Could not find any change ticket that is related to this audit trail record.
+14. **Record 14**  
+    - **Date & Time**: 2024-01-24 16:00:00  
+    - **Component Modified**: WebService  
+    - **Modified by User**: USER002  
+    - **Result**: Could not find any change ticket that is related to this audit trail record.
 
 ---
 
 ## Recommendations
-1. **Immediate Remediation**: Investigate and address the discrepancies where changes were made without corresponding change tickets or by unauthorized users.
-2. **Access Alignment**: Ensure all changes are carried out by authorized users and are linked to valid change tickets.
-3. **Periodic Reviews**: Conduct regular reviews of audit trail records to ensure compliance with change management policies.
+1. **Review and Adjust Change Management Processes**: For records with non-compliant audit trails, review the change management processes and ensure that all changes are properly documented with corresponding change tickets.
+2. **Training and Awareness**: Provide training to users on the importance of adhering to change management policies and procedures.
+3. **Enhanced Monitoring**: Implement additional monitoring mechanisms to flag changes that are not properly documented before they are executed.
 
 ---
 
-This concludes the change management audit findings.
+**Prepared by**: Change Management Compliance Analyst  
+**Date**: 2024-01-30  
 ```
