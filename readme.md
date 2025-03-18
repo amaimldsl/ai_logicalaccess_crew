@@ -1,6 +1,6 @@
-# LARC - Logical Access Review Crew
+# LARC - Audit Agents Crew
 
-LARC is an AI-powered audit automation framework that performs comprehensive IT compliance audits using a crew of specialized AI agents. This system leverages the CrewAI framework to simulate a team of auditors, each with specific roles, working together to analyze access controls, transaction limits, change management processes, and policy compliance.
+LARC is an AI-powered audit automation framework that performs comprehensive compliance audits using a crew of specialized AI agents. This system leverages the CrewAI framework to simulate a team of AI auditors, each with specific roles, working together to analyze access controls, transaction limits, change management processes, and policy compliance.
 
 ## Overview
 
@@ -155,3 +155,9 @@ The system includes comprehensive logging:
 - The system includes exponential backoff retry mechanisms for API rate limits
 - Error handling is implemented for file processing and API calls
 - Task outputs are structured according to audit best practices
+
+## Status
+- This is experimental code that is still under development and may undergo further enhancements. 
+- Compiled and tested by Ayman Maimoni.
+
+
